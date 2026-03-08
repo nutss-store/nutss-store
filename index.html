@@ -1,1269 +1,172 @@
-<!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NUTSS STORE</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: Arial, sans-serif;
-    }
-
-    html {
-      scroll-behavior: smooth;
-    }
-
-    body {
-      background:
-        radial-gradient(circle at top left, rgba(138,43,226,0.08), transparent 20%),
-        radial-gradient(circle at top right, rgba(255,0,76,0.06), transparent 20%),
-        #050507;
-      color: #fff;
-    }
-
-    a {
-      text-decoration: none;
-      color: inherit;
-    }
-
-    header {
-      background: rgba(13, 13, 18, 0.88);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 18px 24px;
-      position: sticky;
-      top: 0;
-      z-index: 50;
-      backdrop-filter: blur(14px);
-    }
-
-    .topbar {
-      max-width: 1240px;
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 16px;
-    }
-
-    .logo {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-    }
-
-    .logo-icon {
-      width: 52px;
-      height: 52px;
-      border-radius: 16px;
-      background: linear-gradient(135deg, #8a2be2, #ff0059);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      font-weight: bold;
-      box-shadow: 0 0 25px rgba(255, 0, 89, 0.28);
-    }
-
-    .logo-text h1 {
-      font-size: 33px;
-      letter-spacing: 2px;
-      color: #fff;
-    }
-
-    .logo-text p {
-      color: #d36cff;
-      font-size: 12px;
-      letter-spacing: 2px;
-    }
-
-    .nav-buttons {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-
-    .nav-buttons button,
-    .nav-buttons a,
-    .btn,
-    .buy-btn,
-    .copy-btn,
-    .send-btn,
-    .clear-btn,
-    .discord-btn,
-    .owner-btn {
-      background: linear-gradient(90deg, #8a2be2, #ff0059);
-      color: white;
-      border: none;
-      padding: 12px 16px;
-      border-radius: 14px;
-      cursor: pointer;
-      font-weight: bold;
-      transition: 0.24s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-    }
-
-    .nav-buttons button:hover,
-    .nav-buttons a:hover,
-    .btn:hover,
-    .buy-btn:hover,
-    .copy-btn:hover,
-    .send-btn:hover,
-    .discord-btn:hover,
-    .owner-btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 28px rgba(255, 0, 89, 0.2);
-    }
-
-    .clear-btn {
-      background: #1b1c27;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .hero {
-      max-width: 1240px;
-      margin: 24px auto 0;
-      padding: 20px;
-      display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
-      gap: 24px;
-    }
-
-    .hero-left {
-      background:
-        radial-gradient(circle at top left, rgba(138,43,226,0.2), transparent 32%),
-        radial-gradient(circle at bottom right, rgba(255,0,89,0.12), transparent 32%),
-        linear-gradient(135deg, #10121b, #090a10);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px;
-      padding: 38px;
-      box-shadow: 0 0 40px rgba(138,43,226,0.08);
-      overflow: hidden;
-      position: relative;
-    }
-
-    .tag {
-      display: inline-block;
-      padding: 8px 14px;
-      border-radius: 999px;
-      font-size: 12px;
-      color: #f1c8ff;
-      border: 1px solid rgba(211,108,255,0.25);
-      background: rgba(211,108,255,0.08);
-      margin-bottom: 18px;
-    }
-
-    .hero h2 {
-      font-size: 58px;
-      line-height: 1.02;
-      margin-bottom: 16px;
-    }
-
-    .highlight {
-      background: linear-gradient(90deg, #d36cff, #ff4b8b);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-    }
-
-    .hero p {
-      color: #c8c8d3;
-      font-size: 17px;
-      margin-bottom: 24px;
-      max-width: 690px;
-      line-height: 1.7;
-    }
-
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-bottom: 24px;
-    }
-
-    .hero-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 12px;
-      margin-top: 10px;
-    }
-
-    .mini-hero-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 18px;
-      padding: 16px;
-      transition: 0.22s ease;
-    }
-
-    .mini-hero-box:hover {
-      transform: translateY(-2px);
-      border-color: rgba(211,108,255,0.35);
-    }
-
-    .mini-hero-box strong {
-      display: block;
-      font-size: 22px;
-      margin-bottom: 4px;
-    }
-
-    .mini-hero-box span {
-      color: #bebed0;
-      font-size: 13px;
-    }
-
-    .hero-card {
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 30px;
-      padding: 24px;
-      box-shadow: 0 0 35px rgba(255,0,89,0.08);
-    }
-
-    .hero-card h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .hero-card p {
-      color: #c5c5cf;
-      margin-bottom: 16px;
-      line-height: 1.6;
-    }
-
-    .featured {
-      background:
-        radial-gradient(circle at top left, rgba(138,43,226,0.24), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(255,0,89,0.14), transparent 35%),
-        linear-gradient(135deg, #161622, #0e0f16);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      padding: 20px;
-      margin-top: 10px;
-    }
-
-    .featured .label {
-      display: inline-block;
-      margin-bottom: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.05);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 12px;
-    }
-
-    .featured h4 {
-      font-size: 30px;
-      margin-bottom: 8px;
-    }
-
-    .featured .price {
-      font-size: 36px;
-      font-weight: bold;
-      margin: 16px 0 12px;
-    }
-
-    .trust-section {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 20px 20px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .trust-box,
-    .stat-box,
-    .product,
-    .review-card,
-    .panel,
-    .faq-item,
-    .owner-box,
-    .step {
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
-      transition: 0.24s ease;
-    }
-
-    .trust-box:hover,
-    .stat-box:hover,
-    .product:hover,
-    .review-card:hover,
-    .panel:hover,
-    .faq-item:hover,
-    .owner-box:hover,
-    .step:hover {
-      transform: translateY(-3px);
-      border-color: rgba(211,108,255,0.35);
-    }
-
-    .trust-box {
-      padding: 20px;
-    }
-
-    .trust-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, rgba(138,43,226,0.22), rgba(255,0,89,0.2));
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 22px;
-      margin-bottom: 12px;
-    }
-
-    .trust-box strong {
-      display: block;
-      font-size: 17px;
-      margin-bottom: 8px;
-    }
-
-    .trust-box p {
-      color: #bfbfca;
-      font-size: 14px;
-      line-height: 1.5;
-    }
-
-    .stats {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 0 20px 20px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .stat-box {
-      padding: 24px;
-    }
-
-    .stat-box h3 {
-      font-size: 34px;
-      margin-bottom: 6px;
-      color: #fff;
-    }
-
-    .stat-box p {
-      color: #bfbfca;
-      font-size: 14px;
-    }
-
-    .online-badge {
-      color: #91ff91;
-      font-weight: bold;
-    }
-
-    .container {
-      max-width: 1240px;
-      margin: 0 auto;
-      padding: 20px;
-    }
-
-    .section-title {
-      font-size: 36px;
-      margin-bottom: 8px;
-    }
-
-    .section-subtitle {
-      color: #bdbdc8;
-      margin-bottom: 24px;
-      line-height: 1.6;
-    }
-
-    .controls {
-      display: grid;
-      grid-template-columns: 1fr 260px;
-      gap: 14px;
-      margin-bottom: 24px;
-    }
-
-    .search-input,
-    .filter-select,
-    .proof-input,
-    .owner-input,
-    .owner-textarea {
-      width: 100%;
-      padding: 14px;
-      border-radius: 14px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #0d0e14;
-      color: #fff;
-      outline: none;
-    }
-
-    .owner-textarea {
-      min-height: 110px;
-      resize: vertical;
-    }
-
-    .products {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 18px;
-    }
-
-    .product {
-      overflow: hidden;
-      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-    }
-
-    .product-top {
-      height: 180px;
-      background:
-        radial-gradient(circle at top left, rgba(138,43,226,0.35), transparent 40%),
-        radial-gradient(circle at bottom right, rgba(255,0,89,0.2), transparent 40%),
-        linear-gradient(135deg, #1a1a25, #111118);
-      display: flex;
-      align-items: end;
-      padding: 16px;
-    }
-
-    .badge {
-      background: rgba(0,0,0,0.35);
-      border: 1px solid rgba(255,255,255,0.08);
-      padding: 8px 12px;
-      border-radius: 999px;
-      font-size: 12px;
-    }
-
-    .product-body {
-      padding: 18px;
-    }
-
-    .category {
-      color: #d36cff;
-      font-size: 12px;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      margin-bottom: 10px;
-    }
-
-    .product h3 {
-      font-size: 22px;
-      margin-bottom: 10px;
-    }
-
-    .desc {
-      color: #c4c4ce;
-      font-size: 14px;
-      line-height: 1.5;
-      min-height: 70px;
-    }
-
-    .price-row {
-      margin-top: 18px;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .price {
-      font-size: 28px;
-      font-weight: bold;
-      color: #fff;
-    }
-
-    .reviews {
-      margin-top: 36px;
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 18px;
-    }
-
-    .review-card {
-      padding: 22px;
-    }
-
-    .stars {
-      color: #ffd34d;
-      margin-bottom: 10px;
-      font-size: 18px;
-    }
-
-    .review-card h4 {
-      margin-bottom: 6px;
-      font-size: 18px;
-    }
-
-    .review-meta {
-      color: #9f9fb0;
-      font-size: 13px;
-      margin-bottom: 10px;
-    }
-
-    .review-card p {
-      color: #c5c5cf;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .cart-section {
-      margin-top: 36px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .panel {
-      padding: 24px;
-    }
-
-    .panel h3 {
-      font-size: 24px;
-      margin-bottom: 12px;
-    }
-
-    .panel p {
-      color: #c4c4ce;
-      line-height: 1.6;
-    }
-
-    .cart-list {
-      margin-top: 18px;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .cart-item {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 14px;
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: center;
-    }
-
-    .cart-item-name {
-      font-weight: bold;
-    }
-
-    .checkout-box {
-      margin-top: 18px;
-      background: linear-gradient(135deg, rgba(138,43,226,0.12), rgba(255,0,89,0.08));
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
-      padding: 18px;
-    }
-
-    .checkout-box .row {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: 10px;
-      color: #d9d9e2;
-    }
-
-    .checkout-box .row.total {
-      font-size: 22px;
-      font-weight: bold;
-      color: white;
-    }
-
-    .payment-area {
-      margin-top: 36px;
-      display: none;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .pix-key {
-      margin-top: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 14px;
-      padding: 14px;
-      word-break: break-all;
-      color: #f0f0f4;
-    }
-
-    .discord-box,
-    .owner-box {
-      margin-top: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 18px;
-    }
-
-    .discord-btn {
-      width: 100%;
-      margin-top: 14px;
-      font-size: 15px;
-    }
-
-    .discord-icon {
-      font-size: 18px;
-    }
-
-    .proof-status {
-      margin-top: 12px;
-      color: #d7d7e6;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .owner-grid {
-      display: grid;
-      gap: 12px;
-      margin-top: 14px;
-    }
-
-    .owner-status {
-      margin-top: 12px;
-      color: #d7d7e6;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .how-it-works {
-      margin-top: 40px;
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-    }
-
-    .step {
-      padding: 20px;
-    }
-
-    .step-number {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: linear-gradient(90deg, #8a2be2, #ff0059);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-weight: bold;
-      margin-bottom: 12px;
-    }
-
-    .step h4 {
-      font-size: 18px;
-      margin-bottom: 8px;
-    }
-
-    .step p {
-      color: #c0c0cb;
-      line-height: 1.5;
-      font-size: 14px;
-    }
-
-    .faq {
-      margin-top: 40px;
-      display: grid;
-      gap: 14px;
-    }
-
-    .faq-item {
-      padding: 18px;
-    }
-
-    .faq-item h4 {
-      margin-bottom: 8px;
-      font-size: 18px;
-    }
-
-    .faq-item p {
-      color: #c3c3cf;
-      line-height: 1.6;
-      font-size: 14px;
-    }
-
-    .delivery-note,
-    .terms-box {
-      margin-top: 30px;
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 22px;
-    }
-
-    .delivery-note h3,
-    .terms-box h3 {
-      font-size: 24px;
-      margin-bottom: 10px;
-    }
-
-    .delivery-note p,
-    .terms-box p {
-      color: #c6c6d1;
-      line-height: 1.7;
-      font-size: 14px;
-    }
-
-    .footer {
-      max-width: 1240px;
-      margin: 40px auto 0;
-      padding: 22px 20px 36px;
-      color: #a8a8b8;
-      text-align: center;
-      font-size: 14px;
-      line-height: 1.8;
-    }
-
-    @media (max-width: 1150px) {
-      .products {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .trust-section,
-      .stats,
-      .how-it-works {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .reviews {
-        grid-template-columns: 1fr 1fr;
-      }
-    }
-
-    @media (max-width: 900px) {
-      .hero,
-      .cart-section,
-      .payment-area,
-      .controls {
-        grid-template-columns: 1fr;
-      }
-
-      .products,
-      .reviews,
-      .trust-section,
-      .stats,
-      .how-it-works,
-      .hero-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 640px) {
-      .hero h2 {
-        font-size: 38px;
-      }
-
-      .topbar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .nav-buttons {
-        width: 100%;
-      }
-
-      .nav-buttons a,
-      .nav-buttons button {
-        width: 100%;
-        text-align: center;
-      }
-    }
-  </style>
-</head>
-<body>
-
-  <header>
-    <div class="topbar">
-      <div class="logo">
-        <div class="logo-icon">N</div>
-        <div class="logo-text">
-          <h1>NUTSS</h1>
-          <p>STORE GAMER PREMIUM</p>
-        </div>
-      </div>
-
-      <div class="nav-buttons">
-        <a href="#produtos">Produtos</a>
-        <a href="#avaliacoes">Avaliações</a>
-        <a href="#faq">FAQ</a>
-        <button onclick="abrirCarrinho()">Carrinho</button>
-      </div>
-    </div>
-  </header>
-
-  <section class="hero">
-    <div class="hero-left">
-      <div class="tag">LOJA DIGITAL PROFISSIONAL</div>
-      <h2>A versão final da <span class="highlight">NUTSS premium</span></h2>
-      <p>
-        Uma loja mais forte visualmente, com destaque premium, vitrine moderna,
-        área de pagamento por Pix, suporte pelo Discord da loja e painel do dono mais organizado.
-      </p>
-
-      <div class="hero-actions">
-        <a class="btn" href="#produtos">Ver produtos</a>
-        <button class="btn" onclick="abrirCarrinho()">Abrir pagamento</button>
-      </div>
-
-      <div class="hero-grid">
-        <div class="mini-hero-box">
-          <strong id="onlineCount">128</strong>
-          <span>clientes online agora</span>
-        </div>
-        <div class="mini-hero-box">
-          <strong>24h</strong>
-          <span>entrega digital</span>
-        </div>
-        <div class="mini-hero-box">
-          <strong>4.9/5</strong>
-          <span>nota média da loja</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="hero-card">
-      <h3>Produto em destaque</h3>
-      <p>Seu item principal no topo, com mais peso visual e botão de compra rápido.</p>
-
-      <div class="featured">
-        <div class="label">DESTAQUE DA LOJA</div>
-        <h4>Rockstar Launcher GTA V</h4>
-        <p>Produto digital oficial com visual premium e posição de destaque na vitrine.</p>
-        <div class="price">R$ 65,10</div>
-        <button class="btn" onclick="comprar('Rockstar Launcher GTA V', 65.10)">Comprar agora</button>
-      </div>
-    </div>
-  </section>
-
-  <section class="trust-section">
-    <div class="trust-box">
-      <div class="trust-icon">⚡</div>
-      <strong>Entrega rápida</strong>
-      <p>Fluxo simples e direto para o cliente encontrar o produto e finalizar mais rápido.</p>
-    </div>
-    <div class="trust-box">
-      <div class="trust-icon">🔒</div>
-      <strong>Pagamento seguro</strong>
-      <p>Área de pagamento por Pix com cópia fácil da chave e processo visual organizado.</p>
-    </div>
-    <div class="trust-box">
-      <div class="trust-icon">💬</div>
-      <strong>Suporte via Discord</strong>
-      <p>O cliente pode entrar direto no Discord oficial da loja para falar com o suporte.</p>
-    </div>
-    <div class="trust-box">
-      <div class="trust-icon">👑</div>
-      <strong>Visual premium</strong>
-      <p>Layout final mais forte para passar mais confiança e valor para a marca NUTSS.</p>
-    </div>
-  </section>
-
-  <section class="stats">
-    <div class="stat-box">
-      <h3 id="salesCount">1.284</h3>
-      <p>vendas realizadas</p>
-    </div>
-    <div class="stat-box">
-      <h3>4.9/5</h3>
-      <p>nota média dos clientes</p>
-    </div>
-    <div class="stat-box">
-      <h3>98%</h3>
-      <p>pedidos concluídos</p>
-    </div>
-    <div class="stat-box">
-      <h3 class="online-badge" id="smallOnlineCount">128 online</h3>
-      <p>atividade em tempo real</p>
-    </div>
-  </section>
-
-  <div class="container">
-    <h2 class="section-title" id="produtos">Produtos</h2>
-    <p class="section-subtitle">Busque seus produtos e filtre por categoria para encontrar mais rápido.</p>
-
-    <div class="controls">
-      <input type="text" id="searchInput" class="search-input" placeholder="Buscar produto..." onkeyup="filtrarProdutos()" />
-      <select id="filterSelect" class="filter-select" onchange="filtrarProdutos()">
-        <option value="todos">Todas as categorias</option>
-        <option value="Keys de Jogos">Keys de Jogos</option>
-        <option value="Assinaturas">Assinaturas</option>
-        <option value="Licença oficial">Licença oficial</option>
-        <option value="Gift Cards">Gift Cards</option>
-      </select>
-    </div>
-
-    <div class="products" id="productsGrid">
-      <div class="product" data-name="Steam Key Aleatória" data-category="Keys de Jogos">
-        <div class="product-top"><span class="badge">Entrega digital</span></div>
-        <div class="product-body">
-          <div class="category">Keys de Jogos</div>
-          <h3>Steam Key Aleatória</h3>
-          <p class="desc">Produto digital para entrega rápida com visual profissional de vitrine.</p>
-          <div class="price-row">
-            <div class="price">R$ 12,90</div>
-            <button class="buy-btn" onclick="comprar('Steam Key Aleatória', 12.90)">Comprar</button>
+import { useState } from 'react';
+import { Copy, Check, ShoppingCart, Gamepad2, MessageCircle } from 'lucide-react';
+
+export default function NutssLojaFacil() {
+  const pixKey = '6efe29f8-4de2-47b6-93e0-40fce6ead3d7';
+  const whatsapp = '5599999999999';
+
+  const products = [
+    { id: 1, name: 'Conta Free Fire Premium (Angelical, passes, punhos e muito mais)', price: 300.0 },
+    { id: 2, name: 'Discord Nitro', price: 12.0 },
+    { id: 3, name: 'Steam Key Aleatória', price: 12.9 },
+    { id: 4, name: 'Gift Card Gamer', price: 49.9 },
+    { id: 5, name: 'Rockstar GTA V (Rockstar Launcher)', price: 65.1 },
+    { id: 6, name: 'Red Dead Redemption 2', price: 89.9 }
+  ];
+
+  const [selectedProduct, setSelectedProduct] = useState(null);
+  const [copied, setCopied] = useState(false);
+
+  const openBuy = (product) => {
+    setSelectedProduct(product);
+    setCopied(false);
+    document.getElementById('pagamento')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const copyPix = async () => {
+    try {
+      await navigator.clipboard.writeText(pixKey);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch (e) {
+      console.error(e);
+    }
+  };
+
+  const formatBRL = (value) =>
+    value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+
+  const whatsappText = selectedProduct
+    ? `Olá, quero confirmar a compra de ${selectedProduct.name} no valor de ${formatBRL(selectedProduct.price)}.`
+    : 'Olá, quero comprar na NUTSS.';
+
+  return (
+    <div className="min-h-screen bg-[#09090d] text-white">
+      <header className="border-b border-white/10 bg-black/60 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
+          <div className="flex items-center gap-3">
+            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-fuchsia-600 to-red-500">
+              <Gamepad2 className="h-5 w-5" />
+            </div>
+            <div>
+              <h1 className="text-2xl font-black tracking-[0.2em]">NUTSS</h1>
+              <p className="text-xs text-fuchsia-300">Loja gamer digital</p>
+            </div>
           </div>
-        </div>
-      </div>
-
-      <div class="product" data-name="Discord Nitro" data-category="Assinaturas">
-        <div class="product-top"><span class="badge">Mais vendido</span></div>
-        <div class="product-body">
-          <div class="category">Assinaturas</div>
-          <h3>Discord Nitro</h3>
-          <p class="desc">Item digital em destaque para venda rápida e apresentação mais bonita.</p>
-          <div class="price-row">
-            <div class="price">R$ 12,00</div>
-            <button class="buy-btn" onclick="comprar('Discord Nitro', 12.00)">Comprar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product" data-name="Rockstar Launcher GTA V" data-category="Licença oficial">
-        <div class="product-top"><span class="badge">Destaque</span></div>
-        <div class="product-body">
-          <div class="category">Licença oficial</div>
-          <h3>Rockstar Launcher GTA V</h3>
-          <p class="desc">Produto digital oficial para jogadores que buscam praticidade e apresentação premium.</p>
-          <div class="price-row">
-            <div class="price">R$ 65,10</div>
-            <button class="buy-btn" onclick="comprar('Rockstar Launcher GTA V', 65.10)">Comprar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product" data-name="Red Dead 2" data-category="Keys de Jogos">
-        <div class="product-top"><span class="badge">Oferta</span></div>
-        <div class="product-body">
-          <div class="category">Keys de Jogos</div>
-          <h3>Red Dead 2</h3>
-          <p class="desc">Página pronta para destacar jogos premium com aparência forte e elegante.</p>
-          <div class="price-row">
-            <div class="price">R$ 89,90</div>
-            <button class="buy-btn" onclick="comprar('Red Dead 2', 89.90)">Comprar</button>
-          </div>
-        </div>
-      </div>
-
-      <div class="product" data-name="Gift Card Gamer" data-category="Gift Cards">
-        <div class="product-top"><span class="badge">Novo</span></div>
-        <div class="product-body">
-          <div class="category">Gift Cards</div>
-          <h3>Gift Card Gamer</h3>
-          <p class="desc">Seção ideal para adicionar novos produtos digitais na loja.</p>
-          <div class="price-row">
-            <div class="price">R$ 49,90</div>
-            <button class="buy-btn" onclick="comprar('Gift Card Gamer', 49.90)">Comprar</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title" id="avaliacoes" style="margin-top:40px;">Avaliações</h2>
-    <p class="section-subtitle">Comentários mais bonitos com nome e data.</p>
-
-    <div class="reviews">
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <h4>Lucas M.</h4>
-        <div class="review-meta">12/03/2026</div>
-        <p>Recebi tudo certinho e o processo de compra foi bem rápido. Loja muito bonita e organizada.</p>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★★</div>
-        <h4>Gabriel S.</h4>
-        <div class="review-meta">09/03/2026</div>
-        <p>Produto liberado sem enrolação. O layout da loja passa bastante confiança.</p>
-      </div>
-      <div class="review-card">
-        <div class="stars">★★★★☆</div>
-        <h4>Mateus R.</h4>
-        <div class="review-meta">05/03/2026</div>
-        <p>Gostei muito do carrinho e da forma de pagamento. Site ficou bonito e fácil de usar.</p>
-      </div>
-    </div>
-
-    <div class="cart-section" id="carrinho">
-      <div class="panel">
-        <h3>Carrinho</h3>
-        <p>Os produtos adicionados aparecem aqui.</p>
-        <div class="cart-list" id="cartList">
-          <div style="color:#999;">Seu carrinho está vazio.</div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3>Resumo do pedido</h3>
-        <p>Abra o pagamento para copiar o Pix e registrar seu comprovante.</p>
-
-        <div class="checkout-box">
-          <div class="row">
-            <span>Subtotal</span>
-            <span id="subtotal">R$ 0,00</span>
-          </div>
-          <div class="row total">
-            <span>Total</span>
-            <span id="total">R$ 0,00</span>
-          </div>
-        </div>
-
-        <button class="copy-btn" onclick="abrirPagamento()">Abrir pagamento</button>
-        <button class="clear-btn" onclick="limparCarrinho()">Limpar carrinho</button>
-      </div>
-    </div>
-
-    <div class="payment-area" id="pagamentoArea">
-      <div class="panel">
-        <h3>Pagamento Pix</h3>
-        <p>Copie sua chave Pix abaixo para concluir o pedido.</p>
-
-        <div class="pix-key" id="pixKey">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</div>
-        <button class="copy-btn" onclick="copiarPix()">Copiar chave Pix</button>
-
-        <div class="discord-box">
-          <h3 style="font-size:20px; margin-bottom:8px;">Suporte da loja</h3>
-          <p style="margin-bottom:8px; color:#c8c8d3;">
-            Entre no Discord oficial da NUTSS para falar com o suporte da loja.
-          </p>
-          <a class="discord-btn" href="https://discord.gg/p5TtR85Pte" target="_blank" rel="noopener noreferrer">
-            <span class="discord-icon">🎮</span>
-            Entrar no Discord da loja
+          <a
+            href="#produtos"
+            className="rounded-2xl bg-gradient-to-r from-fuchsia-600 to-red-500 px-4 py-2 text-sm font-bold"
+          >
+            Ver produtos
           </a>
         </div>
+      </header>
 
-        <div class="discord-box">
-          <h3 style="font-size:20px; margin-bottom:8px;">Enviar comprovante</h3>
-          <p style="margin-bottom:8px; color:#c8c8d3;">
-            Selecione um arquivo do comprovante e registre o envio.
-          </p>
-          <input class="proof-input" type="file" id="proofFile" />
-          <button class="send-btn" onclick="enviarComprovante()">Registrar comprovante</button>
-          <div class="proof-status" id="proofStatus"></div>
-        </div>
-      </div>
-
-      <div class="panel">
-        <h3>Área do dono da loja</h3>
-        <p>Organização visual para separar pedido, status e observações internas.</p>
-
-        <div class="owner-box">
-          <input class="owner-input" id="pedidoInput" type="text" placeholder="Número do pedido" readonly />
-          <input class="owner-input" id="codigoInput" type="text" placeholder="Código do cliente" />
-          <input class="owner-input" id="statusInput" type="text" placeholder="Status do pedido" />
-          <textarea class="owner-textarea" id="obsInput" placeholder="Observações do pedido..."></textarea>
-          <div class="owner-grid">
-            <button class="owner-btn" onclick="salvarPainelDono()">Salvar organização</button>
-          </div>
-          <div class="owner-status" id="ownerStatus">
-            Use essa área para organizar atendimento, status e observações do pedido.
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <h2 class="section-title" style="margin-top:40px;">Como comprar</h2>
-    <p class="section-subtitle">Fluxo simples para o cliente entender melhor.</p>
-
-    <div class="how-it-works">
-      <div class="step">
-        <div class="step-number">1</div>
-        <h4>Escolha o produto</h4>
-        <p>Adicione o item desejado ao carrinho na vitrine principal da loja.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">2</div>
-        <h4>Abra o pagamento</h4>
-        <p>Visualize o resumo do pedido e abra a área de pagamento por Pix.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">3</div>
-        <h4>Pague e registre</h4>
-        <p>Copie a chave Pix, realize o pagamento e registre o comprovante na loja.</p>
-      </div>
-      <div class="step">
-        <div class="step-number">4</div>
-        <h4>Suporte no Discord</h4>
-        <p>Se precisar, o cliente entra no Discord oficial da loja para atendimento.</p>
-      </div>
-    </div>
-
-    <h2 class="section-title" id="faq" style="margin-top:40px;">FAQ</h2>
-    <p class="section-subtitle">Dúvidas comuns dos clientes.</p>
-
-    <div class="faq">
-      <div class="faq-item">
-        <h4>Como recebo meu produto?</h4>
-        <p>Os produtos são digitais. Após o pagamento e a confirmação, o pedido segue para entrega conforme o processo definido pela loja.</p>
-      </div>
-      <div class="faq-item">
-        <h4>Como falar com o suporte?</h4>
-        <p>O suporte da loja foi direcionado para o Discord oficial da NUTSS, facilitando o atendimento.</p>
-      </div>
-      <div class="faq-item">
-        <h4>Quanto tempo demora a confirmação?</h4>
-        <p>O prazo pode variar conforme a validação do pagamento, mas a estrutura da loja está preparada para atendimento rápido.</p>
-      </div>
-      <div class="faq-item">
-        <h4>O pedido tem número automático?</h4>
-        <p>Sim. A loja gera um número automático de pedido para ajudar na organização do atendimento.</p>
-      </div>
-    </div>
-
-    <div class="delivery-note">
-      <h3>Aviso de entrega digital</h3>
-      <p>
-        Todos os itens exibidos nesta loja são tratados como produtos digitais. O cliente deve conferir o pedido antes de pagar,
-        manter o comprovante salvo e utilizar o suporte oficial da loja em caso de atendimento.
-      </p>
-    </div>
-
-    <div class="terms-box">
-      <h3>Termos da loja</h3>
-      <p>
-        Ao comprar na NUTSS, o cliente declara que leu a descrição do produto e concorda com o fluxo digital da loja.
-        Pagamentos devem ser conferidos antes do envio. A organização visual da área do dono serve para gestão do pedido dentro da interface.
-      </p>
-    </div>
-  </div>
-
-  <div class="footer">
-    NUTSS STORE © 2026 — Loja digital com visual gamer premium.<br />
-    Layout final, suporte oficial via Discord e fluxo de pagamento por Pix.
-  </div>
-
-  <script>
-    const carrinho = [];
-    let numeroPedidoAtual = gerarNumeroPedido();
-
-    function gerarNumeroPedido() {
-      return 'NUTSS-' + Math.floor(100000 + Math.random() * 900000);
-    }
-
-    function formatarBRL(valor) {
-      return valor.toLocaleString('pt-BR', {
-        style: 'currency',
-        currency: 'BRL'
-      });
-    }
-
-    function comprar(nome, preco) {
-      carrinho.push({ nome, preco });
-      atualizarCarrinho();
-      document.getElementById('carrinho').scrollIntoView({ behavior: 'smooth' });
-    }
-
-    function atualizarCarrinho() {
-      const lista = document.getElementById('cartList');
-      const subtotal = document.getElementById('subtotal');
-      const total = document.getElementById('total');
-
-      lista.innerHTML = '';
-
-      if (carrinho.length === 0) {
-        lista.innerHTML = '<div style="color:#999;">Seu carrinho está vazio.</div>';
-      } else {
-        carrinho.forEach((item, index) => {
-          const div = document.createElement('div');
-          div.className = 'cart-item';
-          div.innerHTML = `
-            <div>
-              <div class="cart-item-name">${item.nome}</div>
-              <div style="color:#bdbdc8; font-size:14px;">${formatarBRL(item.preco)}</div>
+      <main className="mx-auto max-w-6xl px-6 py-10">
+        <section className="grid gap-8 lg:grid-cols-2 lg:items-center">
+          <div>
+            <p className="inline-block rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 px-4 py-1 text-xs font-semibold text-fuchsia-200">
+              Site simples e bonito
+            </p>
+            <h2 className="mt-5 text-4xl font-black leading-tight md:text-5xl">
+              Loja fácil de usar, com compra rápida e Pix
+            </h2>
+            <p className="mt-4 text-white/70">
+              Modelo mais simples, mais leve e mais fácil para você usar. O cliente escolhe o produto, abre o pagamento e copia a chave Pix com um clique.
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              <a
+                href="#produtos"
+                className="rounded-2xl bg-white px-5 py-3 font-bold text-black"
+              >
+                Escolher produto
+              </a>
+              <a
+                href={`https://wa.me/${whatsapp}?text=${encodeURIComponent('Olá, quero comprar na NUTSS.')}`}
+                className="rounded-2xl border border-white/15 px-5 py-3 font-semibold text-white/90"
+              >
+                WhatsApp
+              </a>
             </div>
-            <button class="buy-btn" onclick="removerItem(${index})">Remover</button>
-          `;
-          lista.appendChild(div);
-        });
-      }
+          </div>
 
-      const soma = carrinho.reduce((acc, item) => acc + item.preco, 0);
-      subtotal.textContent = formatarBRL(soma);
-      total.textContent = formatarBRL(soma);
-    }
+          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl">
+            <div className="rounded-[1.5rem] bg-gradient-to-br from-fuchsia-600/20 to-red-500/20 p-6">
+              <h3 className="text-2xl font-black">Pagamento rápido</h3>
+              <p className="mt-2 text-white/70">Seu cliente clica em comprar, copia o Pix e envia o comprovante.</p>
+              <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4">
+                <p className="text-sm text-white/60">Chave Pix</p>
+                <p className="mt-2 break-all text-sm">{pixKey}</p>
+              </div>
+            </div>
+          </div>
+        </section>
 
-    function removerItem(index) {
-      carrinho.splice(index, 1);
-      atualizarCarrinho();
-    }
+        <section id="produtos" className="mt-14">
+          <h3 className="text-3xl font-black">Produtos</h3>
+          <p className="mt-2 text-white/60">Catálogo simples para começar rápido.</p>
 
-    function limparCarrinho() {
-      carrinho.length = 0;
-      atualizarCarrinho();
-      document.getElementById('pagamentoArea').style.display = 'none';
-      numeroPedidoAtual = gerarNumeroPedido();
-    }
+          <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
+            {products.map((product) => (
+              <div key={product.id} className="rounded-[1.6rem] border border-white/10 bg-white/5 p-4">
+                <div className="h-36 rounded-[1.2rem] bg-gradient-to-br from-fuchsia-600/20 to-red-500/20" />
+                <h4 className="mt-4 text-lg font-black">{product.name}</h4>
+                <p className="mt-2 text-2xl font-black text-fuchsia-300">{formatBRL(product.price)}</p>
+                <button
+                  onClick={() => openBuy(product)}
+                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-600 to-red-500 px-4 py-3 font-bold"
+                >
+                  <ShoppingCart className="h-4 w-4" />
+                  Comprar
+                </button>
+              </div>
+            ))}
+          </div>
+        </section>
 
-    function abrirCarrinho() {
-      document.getElementById('carrinho').scrollIntoView({ behavior: 'smooth' });
-    }
+        <section id="pagamento" className="mt-14">
+          <div className="grid gap-6 lg:grid-cols-2">
+            <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-6">
+              <p className="text-sm text-fuchsia-300">Produto selecionado</p>
+              <h3 className="mt-2 text-3xl font-black">{selectedProduct ? selectedProduct.name : 'Escolha um produto'}</h3>
+              <p className="mt-3 text-white/60">
+                {selectedProduct
+                  ? `Valor: ${formatBRL(selectedProduct.price)}`
+                  : 'Clique em comprar em qualquer produto para abrir o pagamento.'}
+              </p>
 
-    function abrirPagamento() {
-      document.getElementById('pagamentoArea').style.display = 'grid';
-      document.getElementById('pedidoInput').value = numeroPedidoAtual;
-      document.getElementById('pagamentoArea').scrollIntoView({ behavior: 'smooth' });
-    }
+              <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4">
+                <p className="text-sm text-white/60">Chave Pix</p>
+                <p className="mt-2 break-all text-sm">{pixKey}</p>
+              </div>
 
-    function copiarPix() {
-      const chave = document.getElementById('pixKey').innerText;
-      navigator.clipboard.writeText(chave);
-      alert('Chave Pix copiada!');
-    }
+              <button
+                onClick={copyPix}
+                className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-4 py-3 font-bold text-black"
+              >
+                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
+                {copied ? 'Pix copiado' : 'Copiar chave Pix'}
+              </button>
+            </div>
 
-    function enviarComprovante() {
-      const arquivo = document.getElementById('proofFile').files[0];
-      const status = document.getElementById('proofStatus');
+            <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-6">
+              <p className="text-sm text-red-300">Finalização</p>
+              <h3 className="mt-2 text-3xl font-black">Confirmar no WhatsApp</h3>
+              <p className="mt-3 text-white/60">
+                Depois do pagamento, o cliente pode falar direto no WhatsApp para enviar o comprovante.
+              </p>
 
-      if (!arquivo) {
-        status.textContent = 'Selecione um comprovante antes de enviar.';
-        return;
-      }
-
-      status.innerHTML = 'Comprovante registrado no site: <strong>' + arquivo.name + '</strong>';
-    }
-
-    function salvarPainelDono() {
-      const pedido = document.getElementById('pedidoInput').value.trim();
-      const codigo = document.getElementById('codigoInput').value.trim();
-      const statusPedido = document.getElementById('statusInput').value.trim();
-      const obs = document.getElementById('obsInput').value.trim();
-      const status = document.getElementById('ownerStatus');
-
-      if (!pedido) {
-        status.textContent = 'Abra o pagamento para gerar o número do pedido.';
-        return;
-      }
-
-      status.innerHTML = `
-        Organização salva.<br>
-        Pedido: <strong>${pedido}</strong><br>
-        Código do cliente: <strong>${codigo || 'não informado'}</strong><br>
-        Status: <strong>${statusPedido || 'não informado'}</strong><br>
-        Observações: <strong>${obs || 'sem observações'}</strong>
-      `;
-    }
-
-    function filtrarProdutos() {
-      const termo = document.getElementById('searchInput').value.toLowerCase();
-      const categoria = document.getElementById('filterSelect').value;
-      const produtos = document.querySelectorAll('.product');
-
-      produtos.forEach(produto => {
-        const nome = produto.getAttribute('data-name').toLowerCase();
-        const cat = produto.getAttribute('data-category');
-
-        const bateNome = nome.includes(termo);
-        const bateCategoria = categoria === 'todos' || categoria === cat;
-
-        produto.style.display = (bateNome && bateCategoria) ? 'block' : 'none';
-      });
-    }
-
-    function atualizarOnline() {
-      const valor = Math.floor(90 + Math.random() * 60);
-      document.getElementById('onlineCount').textContent = valor;
-      document.getElementById('smallOnlineCount').textContent = valor + ' online';
-    }
-
-    setInterval(atualizarOnline, 4000);
-    atualizarOnline();
-    atualizarCarrinho();
-  </script>
-</body>
-</html>
+              <a
+                href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappText)}`}
+                className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-600 to-red-500 px-4 py-3 font-bold"
+              >
+                <MessageCircle className="h-4 w-4" />
+                Enviar comprovante
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+  );
+}
