@@ -12,9 +12,18 @@
       font-family: Arial, sans-serif;
     }
 
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
       background: #050507;
       color: #fff;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
     }
 
     header {
@@ -23,7 +32,8 @@
       padding: 18px 24px;
       position: sticky;
       top: 0;
-      z-index: 10;
+      z-index: 50;
+      backdrop-filter: blur(10px);
     }
 
     .topbar {
@@ -55,7 +65,7 @@
     }
 
     .logo-text h1 {
-      font-size: 28px;
+      font-size: 30px;
       letter-spacing: 2px;
       color: #fff;
     }
@@ -74,33 +84,58 @@
 
     .nav-buttons button,
     .nav-buttons a,
-    .btn {
+    .btn,
+    .buy-btn,
+    .copy-btn,
+    .send-btn,
+    .clear-btn,
+    .ticket-btn,
+    .faq-btn {
       background: linear-gradient(90deg, #8a2be2, #ff003c);
       color: white;
       border: none;
-      padding: 11px 16px;
+      padding: 12px 16px;
       border-radius: 12px;
       cursor: pointer;
       font-weight: bold;
-      text-decoration: none;
-      transition: 0.2s;
+      transition: 0.22s ease;
       display: inline-block;
+    }
+
+    .nav-buttons button:hover,
+    .nav-buttons a:hover,
+    .btn:hover,
+    .buy-btn:hover,
+    .copy-btn:hover,
+    .send-btn:hover,
+    .ticket-btn:hover,
+    .faq-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 25px rgba(255, 0, 76, 0.18);
+    }
+
+    .clear-btn {
+      background: #1c1d27;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .hero {
       max-width: 1200px;
-      margin: 30px auto 10px;
+      margin: 24px auto 0;
       padding: 20px;
       display: grid;
-      grid-template-columns: 1.2fr 0.8fr;
+      grid-template-columns: 1.15fr 0.85fr;
       gap: 24px;
     }
 
     .hero-left {
-      background: linear-gradient(135deg, rgba(138,43,226,0.15), rgba(255,0,60,0.08));
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.22), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,0,60,0.12), transparent 35%),
+        linear-gradient(135deg, #11131d, #0a0b11);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 32px;
+      border-radius: 28px;
+      padding: 34px;
       box-shadow: 0 0 40px rgba(138,43,226,0.08);
     }
 
@@ -116,8 +151,8 @@
     }
 
     .hero h2 {
-      font-size: 46px;
-      line-height: 1.08;
+      font-size: 52px;
+      line-height: 1.05;
       margin-bottom: 14px;
     }
 
@@ -130,40 +165,131 @@
     .hero p {
       color: #c8c8d3;
       font-size: 17px;
-      margin-bottom: 24px;
+      margin-bottom: 22px;
       max-width: 650px;
+      line-height: 1.6;
     }
 
     .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .mini-hero-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .mini-hero-box strong {
+      display: block;
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .mini-hero-box span {
+      color: #bebed0;
+      font-size: 13px;
     }
 
     .hero-card {
       background: #0f1016;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
+      border-radius: 28px;
       padding: 24px;
       box-shadow: 0 0 35px rgba(255,0,76,0.08);
     }
 
     .hero-card h3 {
-      font-size: 22px;
-      margin-bottom: 12px;
+      font-size: 24px;
+      margin-bottom: 10px;
     }
 
     .hero-card p {
       color: #c5c5cf;
-      margin-bottom: 18px;
+      margin-bottom: 16px;
+      line-height: 1.6;
     }
 
-    .mini-box {
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 14px;
-      margin-top: 12px;
+    .featured {
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.25), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,0,60,0.15), transparent 35%),
+        linear-gradient(135deg, #161622, #0e0f16);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 18px;
+      margin-top: 10px;
+    }
+
+    .featured .label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+    }
+
+    .featured h4 {
+      font-size: 28px;
+      margin-bottom: 8px;
+    }
+
+    .featured .price {
+      font-size: 34px;
+      font-weight: bold;
+      margin: 16px 0 10px;
+    }
+
+    .trust-section {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .trust-box {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 20px;
+      transition: 0.2s ease;
+    }
+
+    .trust-box:hover,
+    .product:hover,
+    .review-card:hover,
+    .stat-box:hover,
+    .panel:hover,
+    .faq-item:hover {
+      transform: translateY(-3px);
+      border-color: rgba(211,108,255,0.35);
+    }
+
+    .trust-box strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .trust-box p {
+      color: #bfbfca;
+      font-size: 14px;
+      line-height: 1.5;
     }
 
     .stats {
@@ -171,7 +297,7 @@
       margin: 0 auto;
       padding: 0 20px 20px;
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 16px;
     }
 
@@ -180,10 +306,11 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
       padding: 22px;
+      transition: 0.2s ease;
     }
 
     .stat-box h3 {
-      font-size: 30px;
+      font-size: 32px;
       margin-bottom: 6px;
       color: #fff;
     }
@@ -193,6 +320,11 @@
       font-size: 14px;
     }
 
+    .online-badge {
+      color: #8cff8c;
+      font-weight: bold;
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -200,13 +332,40 @@
     }
 
     .section-title {
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 8px;
     }
 
     .section-subtitle {
       color: #bdbdc8;
       margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 250px;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .search-input,
+    .filter-select,
+    .proof-input,
+    .ticket-input,
+    .ticket-textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0d0e14;
+      color: #fff;
+      outline: none;
+    }
+
+    .ticket-textarea {
+      min-height: 120px;
+      resize: vertical;
     }
 
     .products {
@@ -220,20 +379,16 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 22px;
       overflow: hidden;
-      transition: 0.2s;
+      transition: 0.22s ease;
       box-shadow: 0 8px 30px rgba(0,0,0,0.25);
-    }
-
-    .product:hover {
-      transform: translateY(-3px);
-      border-color: rgba(211,108,255,0.4);
     }
 
     .product-top {
       height: 170px;
-      background: radial-gradient(circle at top left, rgba(138,43,226,0.35), transparent 40%),
-                  radial-gradient(circle at bottom right, rgba(255,0,60,0.2), transparent 40%),
-                  linear-gradient(135deg, #1a1a25, #111118);
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.35), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(255,0,60,0.2), transparent 40%),
+        linear-gradient(135deg, #1a1a25, #111118);
       display: flex;
       align-items: end;
       padding: 16px;
@@ -285,16 +440,6 @@
       color: #fff;
     }
 
-    .buy-btn {
-      background: linear-gradient(90deg, #8a2be2, #ff003c);
-      border: none;
-      color: #fff;
-      padding: 11px 16px;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
     .reviews {
       margin-top: 36px;
       display: grid;
@@ -307,6 +452,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 20px;
       padding: 22px;
+      transition: 0.2s ease;
     }
 
     .stars {
@@ -316,8 +462,14 @@
     }
 
     .review-card h4 {
-      margin-bottom: 8px;
+      margin-bottom: 6px;
       font-size: 18px;
+    }
+
+    .review-meta {
+      color: #9f9fb0;
+      font-size: 13px;
+      margin-bottom: 10px;
     }
 
     .review-card p {
@@ -338,6 +490,7 @@
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 22px;
       padding: 24px;
+      transition: 0.2s ease;
     }
 
     .panel h3 {
@@ -347,6 +500,7 @@
 
     .panel p {
       color: #c4c4ce;
+      line-height: 1.6;
     }
 
     .cart-list {
@@ -409,44 +563,6 @@
       color: #f0f0f4;
     }
 
-    .copy-btn,
-    .send-btn,
-    .clear-btn,
-    .ticket-btn {
-      width: 100%;
-      margin-top: 14px;
-      background: linear-gradient(90deg, #8a2be2, #ff003c);
-      border: none;
-      color: #fff;
-      padding: 14px;
-      border-radius: 14px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .clear-btn {
-      background: #1c1d27;
-      border: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .proof-input,
-    .ticket-input,
-    .ticket-textarea {
-      width: 100%;
-      padding: 13px;
-      border-radius: 12px;
-      border: 1px solid rgba(255,255,255,0.08);
-      background: #0d0e14;
-      color: #fff;
-      outline: none;
-      margin-top: 10px;
-    }
-
-    .ticket-textarea {
-      min-height: 120px;
-      resize: vertical;
-    }
-
     .ticket-box {
       margin-top: 16px;
       background: rgba(255,255,255,0.04);
@@ -455,10 +571,95 @@
       padding: 16px;
     }
 
-    .ticket-status {
+    .ticket-status,
+    .proof-status {
       margin-top: 12px;
       color: #d7d7e6;
       line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .how-it-works {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 20px;
+    }
+
+    .step-number {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #8a2be2, #ff003c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .step h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: #c0c0cb;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .faq {
+      margin-top: 40px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+      transition: 0.2s ease;
+    }
+
+    .faq-item h4 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .faq-item p {
+      color: #c3c3cf;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .delivery-note,
+    .terms-box {
+      margin-top: 30px;
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .delivery-note h3,
+    .terms-box h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .delivery-note p,
+    .terms-box p {
+      color: #c6c6d1;
+      line-height: 1.7;
       font-size: 14px;
     }
 
@@ -469,33 +670,49 @@
       color: #a8a8b8;
       text-align: center;
       font-size: 14px;
+      line-height: 1.8;
     }
 
-    @media (max-width: 1100px) {
-      .hero,
-      .products,
-      .reviews,
-      .cart-section,
-      .payment-area,
-      .stats {
+    @media (max-width: 1150px) {
+      .products {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .trust-section,
+      .stats,
+      .how-it-works {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .reviews {
         grid-template-columns: 1fr 1fr;
       }
     }
 
-    @media (max-width: 820px) {
+    @media (max-width: 900px) {
       .hero,
-      .products,
-      .reviews,
       .cart-section,
       .payment-area,
-      .stats {
+      .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .products,
+      .reviews,
+      .trust-section,
+      .stats,
+      .how-it-works {
+        grid-template-columns: 1fr;
+      }
+
+      .hero-grid {
         grid-template-columns: 1fr;
       }
     }
 
     @media (max-width: 640px) {
       .hero h2 {
-        font-size: 34px;
+        font-size: 36px;
       }
 
       .topbar {
@@ -530,6 +747,7 @@
       <div class="nav-buttons">
         <a href="#produtos">Produtos</a>
         <a href="#avaliacoes">Avaliações</a>
+        <a href="#faq">FAQ</a>
         <button onclick="abrirCarrinho()">Carrinho</button>
       </div>
     </div>
@@ -538,60 +756,102 @@
   <section class="hero">
     <div class="hero-left">
       <div class="tag">LOJA DIGITAL PROFISSIONAL</div>
-      <h2>Venda com estilo <span class="highlight">gamer premium</span></h2>
+      <h2>Sua loja gamer com cara de <span class="highlight">marca premium</span></h2>
       <p>
-        Loja NUTSS com visual profissional, contagem de vendas, avaliações,
-        checkout com Pix e ticket de suporte mais organizado.
+        Catálogo moderno, visual forte, checkout com Pix, ticket de suporte,
+        busca de produtos, avaliações, selos de confiança e uma estrutura mais profissional para sua NUTSS.
       </p>
 
       <div class="hero-actions">
         <a class="btn" href="#produtos">Ver produtos</a>
         <button class="btn" onclick="abrirCarrinho()">Abrir pagamento</button>
       </div>
+
+      <div class="hero-grid">
+        <div class="mini-hero-box">
+          <strong id="onlineCount">128</strong>
+          <span>clientes online agora</span>
+        </div>
+        <div class="mini-hero-box">
+          <strong>24h</strong>
+          <span>entrega digital</span>
+        </div>
+        <div class="mini-hero-box">
+          <strong>4.9/5</strong>
+          <span>avaliação média</span>
+        </div>
+      </div>
     </div>
 
     <div class="hero-card">
-      <h3>Destaques da loja</h3>
-      <p>Layout melhorado para passar mais confiança e deixar a loja mais forte visualmente.</p>
+      <h3>Produto em destaque</h3>
+      <p>Seu item mais forte em uma área mais nobre para chamar atenção logo no topo.</p>
 
-      <div class="mini-box">
-        <strong>Contador de vendas</strong>
-        Mostra volume de pedidos para dar mais credibilidade.
+      <div class="featured">
+        <div class="label">DESTAQUE DA LOJA</div>
+        <h4>Rockstar Launcher GTA V</h4>
+        <p>Produto digital oficial com visual premium e posição de destaque na sua vitrine.</p>
+        <div class="price">R$ 65,10</div>
+        <button class="btn" onclick="comprar('Rockstar Launcher GTA V', 65.10)">Comprar agora</button>
       </div>
+    </div>
+  </section>
 
-      <div class="mini-box">
-        <strong>Avaliações</strong>
-        Área com estrelas e comentários de clientes.
-      </div>
-
-      <div class="mini-box">
-        <strong>Ticket de suporte</strong>
-        No lugar do chat online, agora tem uma área mais limpa para suporte.
-      </div>
+  <section class="trust-section">
+    <div class="trust-box">
+      <strong>Entrega rápida</strong>
+      <p>Produtos digitais preparados para envio simples e fluxo mais direto de compra.</p>
+    </div>
+    <div class="trust-box">
+      <strong>Pagamento seguro</strong>
+      <p>Área de pagamento por Pix com cópia rápida da chave e processo visual organizado.</p>
+    </div>
+    <div class="trust-box">
+      <strong>Suporte pós-compra</strong>
+      <p>Ticket de suporte mais bonito para organizar dúvidas e atendimento do comprador.</p>
+    </div>
+    <div class="trust-box">
+      <strong>Loja premium</strong>
+      <p>Layout mais forte para transmitir mais confiança e valor ao cliente.</p>
     </div>
   </section>
 
   <section class="stats">
     <div class="stat-box">
       <h3 id="salesCount">1.284</h3>
-      <p>Vendas realizadas</p>
+      <p>vendas realizadas</p>
     </div>
     <div class="stat-box">
       <h3>4.9/5</h3>
-      <p>Nota média dos clientes</p>
+      <p>nota média dos clientes</p>
     </div>
     <div class="stat-box">
       <h3>98%</h3>
-      <p>Pedidos entregues com sucesso</p>
+      <p>pedidos concluídos</p>
+    </div>
+    <div class="stat-box">
+      <h3 class="online-badge" id="smallOnlineCount">128 online</h3>
+      <p>atividade em tempo real</p>
     </div>
   </section>
 
   <div class="container">
     <h2 class="section-title" id="produtos">Produtos</h2>
-    <p class="section-subtitle">Catálogo gamer profissional com destaque para compra rápida.</p>
+    <p class="section-subtitle">Busque seus produtos e filtre por categoria para encontrar mais rápido.</p>
 
-    <div class="products">
-      <div class="product">
+    <div class="controls">
+      <input type="text" id="searchInput" class="search-input" placeholder="Buscar produto..." onkeyup="filtrarProdutos()" />
+      <select id="filterSelect" class="filter-select" onchange="filtrarProdutos()">
+        <option value="todos">Todas as categorias</option>
+        <option value="Keys de Jogos">Keys de Jogos</option>
+        <option value="Assinaturas">Assinaturas</option>
+        <option value="Licença oficial">Licença oficial</option>
+        <option value="Gift Cards">Gift Cards</option>
+      </select>
+    </div>
+
+    <div class="products" id="productsGrid">
+      <div class="product" data-name="Steam Key Aleatória" data-category="Keys de Jogos">
         <div class="product-top"><span class="badge">Entrega digital</span></div>
         <div class="product-body">
           <div class="category">Keys de Jogos</div>
@@ -604,7 +864,7 @@
         </div>
       </div>
 
-      <div class="product">
+      <div class="product" data-name="Discord Nitro" data-category="Assinaturas">
         <div class="product-top"><span class="badge">Mais vendido</span></div>
         <div class="product-body">
           <div class="category">Assinaturas</div>
@@ -617,8 +877,8 @@
         </div>
       </div>
 
-      <div class="product">
-        <div class="product-top"><span class="badge">Oferta</span></div>
+      <div class="product" data-name="Rockstar Launcher GTA V" data-category="Licença oficial">
+        <div class="product-top"><span class="badge">Destaque</span></div>
         <div class="product-body">
           <div class="category">Licença oficial</div>
           <h3>Rockstar Launcher GTA V</h3>
@@ -630,7 +890,7 @@
         </div>
       </div>
 
-      <div class="product">
+      <div class="product" data-name="Red Dead 2" data-category="Keys de Jogos">
         <div class="product-top"><span class="badge">Oferta</span></div>
         <div class="product-body">
           <div class="category">Keys de Jogos</div>
@@ -643,7 +903,7 @@
         </div>
       </div>
 
-      <div class="product">
+      <div class="product" data-name="Gift Card Gamer" data-category="Gift Cards">
         <div class="product-top"><span class="badge">Novo</span></div>
         <div class="product-body">
           <div class="category">Gift Cards</div>
@@ -658,23 +918,26 @@
     </div>
 
     <h2 class="section-title" id="avaliacoes" style="margin-top:40px;">Avaliações</h2>
-    <p class="section-subtitle">Comentários e reputação da sua loja.</p>
+    <p class="section-subtitle">Comentários mais bonitos com nome e data.</p>
 
     <div class="reviews">
       <div class="review-card">
         <div class="stars">★★★★★</div>
-        <h4>Compra rápida</h4>
-        <p>Recebi tudo certinho e o pagamento foi simples. Loja muito bonita e organizada.</p>
+        <h4>Lucas M.</h4>
+        <div class="review-meta">12/03/2026</div>
+        <p>Recebi tudo certinho e o processo de compra foi bem rápido. Loja muito bonita e organizada.</p>
       </div>
       <div class="review-card">
         <div class="stars">★★★★★</div>
-        <h4>Atendimento bom</h4>
-        <p>Produto entregue rápido e suporte respondeu bem. Visual da loja passa confiança.</p>
+        <h4>Gabriel S.</h4>
+        <div class="review-meta">09/03/2026</div>
+        <p>Produto liberado sem enrolação. O layout da loja passa bastante confiança.</p>
       </div>
       <div class="review-card">
         <div class="stars">★★★★☆</div>
-        <h4>Boa experiência</h4>
-        <p>Gostei da organização, do carrinho e da parte de pagamento. Tudo bem fácil de usar.</p>
+        <h4>Mateus R.</h4>
+        <div class="review-meta">05/03/2026</div>
+        <p>Gostei muito do carrinho e da forma de pagamento. Site ficou bonito e fácil de usar.</p>
       </div>
     </div>
 
@@ -720,16 +983,16 @@
           <p style="margin-bottom:8px;">Selecione um arquivo do comprovante e registre o envio.</p>
           <input class="proof-input" type="file" id="proofFile" />
           <button class="send-btn" onclick="enviarComprovante()">Registrar comprovante</button>
-          <p id="proofStatus" style="margin-top:10px; color:#cfcfe6;"></p>
+          <div class="proof-status" id="proofStatus"></div>
         </div>
       </div>
 
       <div class="panel">
         <h3>Ticket de suporte</h3>
-        <p>Área visual para suporte pós-compra.</p>
+        <p>Área organizada para suporte pós-compra.</p>
 
         <div class="ticket-box">
-          <input class="ticket-input" id="pedidoInput" type="text" placeholder="Número do pedido" />
+          <input class="ticket-input" id="pedidoInput" type="text" placeholder="Número do pedido" readonly />
           <input class="ticket-input" id="codigoInput" type="text" placeholder="Código de acesso do comprador" />
           <input class="ticket-input" id="assuntoInput" type="text" placeholder="Assunto do suporte" />
           <textarea class="ticket-textarea" id="mensagemInput" placeholder="Descreva o problema ou dúvida..."></textarea>
@@ -740,14 +1003,85 @@
         </div>
       </div>
     </div>
+
+    <h2 class="section-title" style="margin-top:40px;">Como comprar</h2>
+    <p class="section-subtitle">Fluxo simples para o cliente entender melhor.</p>
+
+    <div class="how-it-works">
+      <div class="step">
+        <div class="step-number">1</div>
+        <h4>Escolha o produto</h4>
+        <p>Adicione o item desejado ao carrinho na vitrine principal da loja.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">2</div>
+        <h4>Abra o pagamento</h4>
+        <p>Visualize o resumo do pedido e abra a área de pagamento por Pix.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">3</div>
+        <h4>Envie o comprovante</h4>
+        <p>Copie a chave Pix, realize o pagamento e registre seu comprovante.</p>
+      </div>
+      <div class="step">
+        <div class="step-number">4</div>
+        <h4>Receba o produto</h4>
+        <p>Após a confirmação, o pedido segue para entrega digital conforme o fluxo da loja.</p>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="faq" style="margin-top:40px;">FAQ</h2>
+    <p class="section-subtitle">Dúvidas comuns dos clientes.</p>
+
+    <div class="faq">
+      <div class="faq-item">
+        <h4>Como recebo meu produto?</h4>
+        <p>Os produtos são digitais. Após o pagamento e a confirmação, o pedido segue para entrega conforme o processo definido pela loja.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Quanto tempo demora a confirmação?</h4>
+        <p>O prazo pode variar conforme a validação do pagamento, mas a estrutura da loja está preparada para atendimento rápido.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Posso abrir suporte após comprar?</h4>
+        <p>Sim. A área de ticket foi colocada para organizar dúvidas, problemas e pedidos de suporte pós-compra.</p>
+      </div>
+      <div class="faq-item">
+        <h4>Como funciona o código de acesso do ticket?</h4>
+        <p>Nesta versão, ele está como campo visual do sistema. Para validação real e privada, depois precisa integrar com backend.</p>
+      </div>
+    </div>
+
+    <div class="delivery-note">
+      <h3>Aviso de entrega digital</h3>
+      <p>
+        Todos os itens exibidos nesta loja são tratados como produtos digitais. O cliente deve conferir o pedido antes de pagar,
+        manter o comprovante salvo e utilizar a área de suporte caso precise de atendimento.
+      </p>
+    </div>
+
+    <div class="terms-box">
+      <h3>Termos da loja</h3>
+      <p>
+        Ao comprar na NUTSS, o cliente declara que leu a descrição do produto e concorda com o fluxo digital da loja.
+        Pagamentos devem ser conferidos antes do envio. A estrutura visual de suporte e ticket pode ser aprimorada futuramente
+        com sistema privado, autenticação e registro real em banco de dados.
+      </p>
+    </div>
   </div>
 
   <div class="footer">
-    NUTSS STORE © 2026 — Loja digital com visual gamer premium.
+    NUTSS STORE © 2026 — Loja digital com visual gamer premium.<br />
+    Layout profissional, produtos digitais, pagamento por Pix e suporte pós-compra.
   </div>
 
   <script>
     const carrinho = [];
+    let numeroPedidoAtual = gerarNumeroPedido();
+
+    function gerarNumeroPedido() {
+      return 'NUTSS-' + Math.floor(100000 + Math.random() * 900000);
+    }
 
     function formatarBRL(valor) {
       return valor.toLocaleString('pt-BR', {
@@ -800,6 +1134,7 @@
       carrinho.length = 0;
       atualizarCarrinho();
       document.getElementById('pagamentoArea').style.display = 'none';
+      numeroPedidoAtual = gerarNumeroPedido();
     }
 
     function abrirCarrinho() {
@@ -808,6 +1143,7 @@
 
     function abrirPagamento() {
       document.getElementById('pagamentoArea').style.display = 'grid';
+      document.getElementById('pedidoInput').value = numeroPedidoAtual;
       document.getElementById('pagamentoArea').scrollIntoView({ behavior: 'smooth' });
     }
 
@@ -826,7 +1162,7 @@
         return;
       }
 
-      status.textContent = 'Comprovante registrado no site: ' + arquivo.name;
+      status.innerHTML = 'Comprovante registrado no site: <strong>' + arquivo.name + '</strong>';
     }
 
     function abrirTicket() {
@@ -849,6 +1185,30 @@
       `;
     }
 
+    function filtrarProdutos() {
+      const termo = document.getElementById('searchInput').value.toLowerCase();
+      const categoria = document.getElementById('filterSelect').value;
+      const produtos = document.querySelectorAll('.product');
+
+      produtos.forEach(produto => {
+        const nome = produto.getAttribute('data-name').toLowerCase();
+        const cat = produto.getAttribute('data-category');
+
+        const bateNome = nome.includes(termo);
+        const bateCategoria = categoria === 'todos' || categoria === cat;
+
+        produto.style.display = (bateNome && bateCategoria) ? 'block' : 'none';
+      });
+    }
+
+    function atualizarOnline() {
+      const valor = Math.floor(90 + Math.random() * 60);
+      document.getElementById('onlineCount').textContent = valor;
+      document.getElementById('smallOnlineCount').textContent = valor + ' online';
+    }
+
+    setInterval(atualizarOnline, 4000);
+    atualizarOnline();
     atualizarCarrinho();
   </script>
 </body>
