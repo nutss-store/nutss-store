@@ -17,7 +17,10 @@
     }
 
     body {
-      background: #050507;
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.08), transparent 20%),
+        radial-gradient(circle at top right, rgba(255,0,76,0.06), transparent 20%),
+        #050507;
       color: #fff;
     }
 
@@ -27,17 +30,17 @@
     }
 
     header {
-      background: linear-gradient(90deg, #0d0d12, #151522, #0d0d12);
+      background: rgba(13, 13, 18, 0.88);
       border-bottom: 1px solid rgba(255,255,255,0.08);
       padding: 18px 24px;
       position: sticky;
       top: 0;
       z-index: 50;
-      backdrop-filter: blur(10px);
+      backdrop-filter: blur(14px);
     }
 
     .topbar {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       display: flex;
       align-items: center;
@@ -48,24 +51,24 @@
     .logo {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 14px;
     }
 
     .logo-icon {
-      width: 48px;
-      height: 48px;
-      border-radius: 14px;
-      background: linear-gradient(135deg, #8a2be2, #ff003c);
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #8a2be2, #ff0059);
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 22px;
+      font-size: 24px;
       font-weight: bold;
-      box-shadow: 0 0 25px rgba(255, 0, 76, 0.25);
+      box-shadow: 0 0 25px rgba(255, 0, 89, 0.28);
     }
 
     .logo-text h1 {
-      font-size: 30px;
+      font-size: 33px;
       letter-spacing: 2px;
       color: #fff;
     }
@@ -89,17 +92,20 @@
     .copy-btn,
     .send-btn,
     .clear-btn,
-    .ticket-btn,
-    .faq-btn {
-      background: linear-gradient(90deg, #8a2be2, #ff003c);
+    .discord-btn,
+    .owner-btn {
+      background: linear-gradient(90deg, #8a2be2, #ff0059);
       color: white;
       border: none;
       padding: 12px 16px;
-      border-radius: 12px;
+      border-radius: 14px;
       cursor: pointer;
       font-weight: bold;
-      transition: 0.22s ease;
-      display: inline-block;
+      transition: 0.24s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
     }
 
     .nav-buttons button:hover,
@@ -108,35 +114,37 @@
     .buy-btn:hover,
     .copy-btn:hover,
     .send-btn:hover,
-    .ticket-btn:hover,
-    .faq-btn:hover {
+    .discord-btn:hover,
+    .owner-btn:hover {
       transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(255, 0, 76, 0.18);
+      box-shadow: 0 10px 28px rgba(255, 0, 89, 0.2);
     }
 
     .clear-btn {
-      background: #1c1d27;
+      background: #1b1c27;
       border: 1px solid rgba(255,255,255,0.08);
     }
 
     .hero {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 24px auto 0;
       padding: 20px;
       display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+      grid-template-columns: 1.2fr 0.8fr;
       gap: 24px;
     }
 
     .hero-left {
       background:
-        radial-gradient(circle at top left, rgba(138,43,226,0.22), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(255,0,60,0.12), transparent 35%),
-        linear-gradient(135deg, #11131d, #0a0b11);
+        radial-gradient(circle at top left, rgba(138,43,226,0.2), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255,0,89,0.12), transparent 32%),
+        linear-gradient(135deg, #10121b, #090a10);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 28px;
-      padding: 34px;
+      border-radius: 30px;
+      padding: 38px;
       box-shadow: 0 0 40px rgba(138,43,226,0.08);
+      overflow: hidden;
+      position: relative;
     }
 
     .tag {
@@ -151,13 +159,13 @@
     }
 
     .hero h2 {
-      font-size: 52px;
-      line-height: 1.05;
-      margin-bottom: 14px;
+      font-size: 58px;
+      line-height: 1.02;
+      margin-bottom: 16px;
     }
 
     .highlight {
-      background: linear-gradient(90deg, #d36cff, #ff4b6e);
+      background: linear-gradient(90deg, #d36cff, #ff4b8b);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
@@ -165,35 +173,41 @@
     .hero p {
       color: #c8c8d3;
       font-size: 17px;
-      margin-bottom: 22px;
-      max-width: 650px;
-      line-height: 1.6;
+      margin-bottom: 24px;
+      max-width: 690px;
+      line-height: 1.7;
     }
 
     .hero-actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 22px;
+      margin-bottom: 24px;
     }
 
     .hero-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 12px;
-      margin-top: 14px;
+      margin-top: 10px;
     }
 
     .mini-hero-box {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.07);
-      border-radius: 16px;
-      padding: 14px;
+      border-radius: 18px;
+      padding: 16px;
+      transition: 0.22s ease;
+    }
+
+    .mini-hero-box:hover {
+      transform: translateY(-2px);
+      border-color: rgba(211,108,255,0.35);
     }
 
     .mini-hero-box strong {
       display: block;
-      font-size: 20px;
+      font-size: 22px;
       margin-bottom: 4px;
     }
 
@@ -205,9 +219,9 @@
     .hero-card {
       background: #0f1016;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 28px;
+      border-radius: 30px;
       padding: 24px;
-      box-shadow: 0 0 35px rgba(255,0,76,0.08);
+      box-shadow: 0 0 35px rgba(255,0,89,0.08);
     }
 
     .hero-card h3 {
@@ -223,12 +237,12 @@
 
     .featured {
       background:
-        radial-gradient(circle at top left, rgba(138,43,226,0.25), transparent 35%),
-        radial-gradient(circle at bottom right, rgba(255,0,60,0.15), transparent 35%),
+        radial-gradient(circle at top left, rgba(138,43,226,0.24), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,0,89,0.14), transparent 35%),
         linear-gradient(135deg, #161622, #0e0f16);
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 18px;
+      border-radius: 22px;
+      padding: 20px;
       margin-top: 10px;
     }
 
@@ -243,18 +257,18 @@
     }
 
     .featured h4 {
-      font-size: 28px;
+      font-size: 30px;
       margin-bottom: 8px;
     }
 
     .featured .price {
-      font-size: 34px;
+      font-size: 36px;
       font-weight: bold;
-      margin: 16px 0 10px;
+      margin: 16px 0 12px;
     }
 
     .trust-section {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 20px 20px;
       display: grid;
@@ -262,22 +276,46 @@
       gap: 16px;
     }
 
-    .trust-box {
+    .trust-box,
+    .stat-box,
+    .product,
+    .review-card,
+    .panel,
+    .faq-item,
+    .owner-box,
+    .step {
       background: #0f1016;
       border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 20px;
-      transition: 0.2s ease;
+      border-radius: 22px;
+      transition: 0.24s ease;
     }
 
     .trust-box:hover,
+    .stat-box:hover,
     .product:hover,
     .review-card:hover,
-    .stat-box:hover,
     .panel:hover,
-    .faq-item:hover {
+    .faq-item:hover,
+    .owner-box:hover,
+    .step:hover {
       transform: translateY(-3px);
       border-color: rgba(211,108,255,0.35);
+    }
+
+    .trust-box {
+      padding: 20px;
+    }
+
+    .trust-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(138,43,226,0.22), rgba(255,0,89,0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
     }
 
     .trust-box strong {
@@ -293,7 +331,7 @@
     }
 
     .stats {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 0 20px 20px;
       display: grid;
@@ -302,15 +340,11 @@
     }
 
     .stat-box {
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 22px;
-      transition: 0.2s ease;
+      padding: 24px;
     }
 
     .stat-box h3 {
-      font-size: 32px;
+      font-size: 34px;
       margin-bottom: 6px;
       color: #fff;
     }
@@ -321,18 +355,18 @@
     }
 
     .online-badge {
-      color: #8cff8c;
+      color: #91ff91;
       font-weight: bold;
     }
 
     .container {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 0 auto;
       padding: 20px;
     }
 
     .section-title {
-      font-size: 34px;
+      font-size: 36px;
       margin-bottom: 8px;
     }
 
@@ -344,7 +378,7 @@
 
     .controls {
       display: grid;
-      grid-template-columns: 1fr 250px;
+      grid-template-columns: 1fr 260px;
       gap: 14px;
       margin-bottom: 24px;
     }
@@ -352,8 +386,8 @@
     .search-input,
     .filter-select,
     .proof-input,
-    .ticket-input,
-    .ticket-textarea {
+    .owner-input,
+    .owner-textarea {
       width: 100%;
       padding: 14px;
       border-radius: 14px;
@@ -363,8 +397,8 @@
       outline: none;
     }
 
-    .ticket-textarea {
-      min-height: 120px;
+    .owner-textarea {
+      min-height: 110px;
       resize: vertical;
     }
 
@@ -375,19 +409,15 @@
     }
 
     .product {
-      background: linear-gradient(180deg, #101117, #0b0b10);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
       overflow: hidden;
-      transition: 0.22s ease;
       box-shadow: 0 8px 30px rgba(0,0,0,0.25);
     }
 
     .product-top {
-      height: 170px;
+      height: 180px;
       background:
         radial-gradient(circle at top left, rgba(138,43,226,0.35), transparent 40%),
-        radial-gradient(circle at bottom right, rgba(255,0,60,0.2), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(255,0,89,0.2), transparent 40%),
         linear-gradient(135deg, #1a1a25, #111118);
       display: flex;
       align-items: end;
@@ -448,11 +478,7 @@
     }
 
     .review-card {
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
       padding: 22px;
-      transition: 0.2s ease;
     }
 
     .stars {
@@ -486,11 +512,7 @@
     }
 
     .panel {
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 22px;
       padding: 24px;
-      transition: 0.2s ease;
     }
 
     .panel h3 {
@@ -527,7 +549,7 @@
 
     .checkout-box {
       margin-top: 18px;
-      background: linear-gradient(135deg, rgba(138,43,226,0.12), rgba(255,0,60,0.08));
+      background: linear-gradient(135deg, rgba(138,43,226,0.12), rgba(255,0,89,0.08));
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 18px;
       padding: 18px;
@@ -563,16 +585,39 @@
       color: #f0f0f4;
     }
 
-    .ticket-box {
+    .discord-box,
+    .owner-box {
       margin-top: 16px;
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
       border-radius: 16px;
-      padding: 16px;
+      padding: 18px;
     }
 
-    .ticket-status,
+    .discord-btn {
+      width: 100%;
+      margin-top: 14px;
+      font-size: 15px;
+    }
+
+    .discord-icon {
+      font-size: 18px;
+    }
+
     .proof-status {
+      margin-top: 12px;
+      color: #d7d7e6;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .owner-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .owner-status {
       margin-top: 12px;
       color: #d7d7e6;
       line-height: 1.5;
@@ -587,17 +632,14 @@
     }
 
     .step {
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
       padding: 20px;
     }
 
     .step-number {
-      width: 38px;
-      height: 38px;
+      width: 40px;
+      height: 40px;
       border-radius: 50%;
-      background: linear-gradient(90deg, #8a2be2, #ff003c);
+      background: linear-gradient(90deg, #8a2be2, #ff0059);
       display: flex;
       align-items: center;
       justify-content: center;
@@ -623,11 +665,7 @@
     }
 
     .faq-item {
-      background: #0f1016;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 18px;
       padding: 18px;
-      transition: 0.2s ease;
     }
 
     .faq-item h4 {
@@ -664,7 +702,7 @@
     }
 
     .footer {
-      max-width: 1200px;
+      max-width: 1240px;
       margin: 40px auto 0;
       padding: 22px 20px 36px;
       color: #a8a8b8;
@@ -701,10 +739,7 @@
       .reviews,
       .trust-section,
       .stats,
-      .how-it-works {
-        grid-template-columns: 1fr;
-      }
-
+      .how-it-works,
       .hero-grid {
         grid-template-columns: 1fr;
       }
@@ -712,7 +747,7 @@
 
     @media (max-width: 640px) {
       .hero h2 {
-        font-size: 36px;
+        font-size: 38px;
       }
 
       .topbar {
@@ -756,10 +791,10 @@
   <section class="hero">
     <div class="hero-left">
       <div class="tag">LOJA DIGITAL PROFISSIONAL</div>
-      <h2>Sua loja gamer com cara de <span class="highlight">marca premium</span></h2>
+      <h2>A versão final da <span class="highlight">NUTSS premium</span></h2>
       <p>
-        Catálogo moderno, visual forte, checkout com Pix, ticket de suporte,
-        busca de produtos, avaliações, selos de confiança e uma estrutura mais profissional para sua NUTSS.
+        Uma loja mais forte visualmente, com destaque premium, vitrine moderna,
+        área de pagamento por Pix, suporte pelo Discord da loja e painel do dono mais organizado.
       </p>
 
       <div class="hero-actions">
@@ -778,19 +813,19 @@
         </div>
         <div class="mini-hero-box">
           <strong>4.9/5</strong>
-          <span>avaliação média</span>
+          <span>nota média da loja</span>
         </div>
       </div>
     </div>
 
     <div class="hero-card">
       <h3>Produto em destaque</h3>
-      <p>Seu item mais forte em uma área mais nobre para chamar atenção logo no topo.</p>
+      <p>Seu item principal no topo, com mais peso visual e botão de compra rápido.</p>
 
       <div class="featured">
         <div class="label">DESTAQUE DA LOJA</div>
         <h4>Rockstar Launcher GTA V</h4>
-        <p>Produto digital oficial com visual premium e posição de destaque na sua vitrine.</p>
+        <p>Produto digital oficial com visual premium e posição de destaque na vitrine.</p>
         <div class="price">R$ 65,10</div>
         <button class="btn" onclick="comprar('Rockstar Launcher GTA V', 65.10)">Comprar agora</button>
       </div>
@@ -799,20 +834,24 @@
 
   <section class="trust-section">
     <div class="trust-box">
+      <div class="trust-icon">⚡</div>
       <strong>Entrega rápida</strong>
-      <p>Produtos digitais preparados para envio simples e fluxo mais direto de compra.</p>
+      <p>Fluxo simples e direto para o cliente encontrar o produto e finalizar mais rápido.</p>
     </div>
     <div class="trust-box">
+      <div class="trust-icon">🔒</div>
       <strong>Pagamento seguro</strong>
-      <p>Área de pagamento por Pix com cópia rápida da chave e processo visual organizado.</p>
+      <p>Área de pagamento por Pix com cópia fácil da chave e processo visual organizado.</p>
     </div>
     <div class="trust-box">
-      <strong>Suporte pós-compra</strong>
-      <p>Ticket de suporte mais bonito para organizar dúvidas e atendimento do comprador.</p>
+      <div class="trust-icon">💬</div>
+      <strong>Suporte via Discord</strong>
+      <p>O cliente pode entrar direto no Discord oficial da loja para falar com o suporte.</p>
     </div>
     <div class="trust-box">
-      <strong>Loja premium</strong>
-      <p>Layout mais forte para transmitir mais confiança e valor ao cliente.</p>
+      <div class="trust-icon">👑</div>
+      <strong>Visual premium</strong>
+      <p>Layout final mais forte para passar mais confiança e valor para a marca NUTSS.</p>
     </div>
   </section>
 
@@ -952,7 +991,7 @@
 
       <div class="panel">
         <h3>Resumo do pedido</h3>
-        <p>Abra o pagamento para copiar o Pix e enviar o comprovante.</p>
+        <p>Abra o pagamento para copiar o Pix e registrar seu comprovante.</p>
 
         <div class="checkout-box">
           <div class="row">
@@ -978,9 +1017,22 @@
         <div class="pix-key" id="pixKey">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</div>
         <button class="copy-btn" onclick="copiarPix()">Copiar chave Pix</button>
 
-        <div class="ticket-box">
+        <div class="discord-box">
+          <h3 style="font-size:20px; margin-bottom:8px;">Suporte da loja</h3>
+          <p style="margin-bottom:8px; color:#c8c8d3;">
+            Entre no Discord oficial da NUTSS para falar com o suporte da loja.
+          </p>
+          <a class="discord-btn" href="https://discord.gg/p5TtR85Pte" target="_blank" rel="noopener noreferrer">
+            <span class="discord-icon">🎮</span>
+            Entrar no Discord da loja
+          </a>
+        </div>
+
+        <div class="discord-box">
           <h3 style="font-size:20px; margin-bottom:8px;">Enviar comprovante</h3>
-          <p style="margin-bottom:8px;">Selecione um arquivo do comprovante e registre o envio.</p>
+          <p style="margin-bottom:8px; color:#c8c8d3;">
+            Selecione um arquivo do comprovante e registre o envio.
+          </p>
           <input class="proof-input" type="file" id="proofFile" />
           <button class="send-btn" onclick="enviarComprovante()">Registrar comprovante</button>
           <div class="proof-status" id="proofStatus"></div>
@@ -988,17 +1040,19 @@
       </div>
 
       <div class="panel">
-        <h3>Ticket de suporte</h3>
-        <p>Área organizada para suporte pós-compra.</p>
+        <h3>Área do dono da loja</h3>
+        <p>Organização visual para separar pedido, status e observações internas.</p>
 
-        <div class="ticket-box">
-          <input class="ticket-input" id="pedidoInput" type="text" placeholder="Número do pedido" readonly />
-          <input class="ticket-input" id="codigoInput" type="text" placeholder="Código de acesso do comprador" />
-          <input class="ticket-input" id="assuntoInput" type="text" placeholder="Assunto do suporte" />
-          <textarea class="ticket-textarea" id="mensagemInput" placeholder="Descreva o problema ou dúvida..."></textarea>
-          <button class="ticket-btn" onclick="abrirTicket()">Abrir ticket</button>
-          <div class="ticket-status" id="ticketStatus">
-            Apenas clientes com pedido e código de compra devem abrir suporte.
+        <div class="owner-box">
+          <input class="owner-input" id="pedidoInput" type="text" placeholder="Número do pedido" readonly />
+          <input class="owner-input" id="codigoInput" type="text" placeholder="Código do cliente" />
+          <input class="owner-input" id="statusInput" type="text" placeholder="Status do pedido" />
+          <textarea class="owner-textarea" id="obsInput" placeholder="Observações do pedido..."></textarea>
+          <div class="owner-grid">
+            <button class="owner-btn" onclick="salvarPainelDono()">Salvar organização</button>
+          </div>
+          <div class="owner-status" id="ownerStatus">
+            Use essa área para organizar atendimento, status e observações do pedido.
           </div>
         </div>
       </div>
@@ -1020,13 +1074,13 @@
       </div>
       <div class="step">
         <div class="step-number">3</div>
-        <h4>Envie o comprovante</h4>
-        <p>Copie a chave Pix, realize o pagamento e registre seu comprovante.</p>
+        <h4>Pague e registre</h4>
+        <p>Copie a chave Pix, realize o pagamento e registre o comprovante na loja.</p>
       </div>
       <div class="step">
         <div class="step-number">4</div>
-        <h4>Receba o produto</h4>
-        <p>Após a confirmação, o pedido segue para entrega digital conforme o fluxo da loja.</p>
+        <h4>Suporte no Discord</h4>
+        <p>Se precisar, o cliente entra no Discord oficial da loja para atendimento.</p>
       </div>
     </div>
 
@@ -1039,16 +1093,16 @@
         <p>Os produtos são digitais. Após o pagamento e a confirmação, o pedido segue para entrega conforme o processo definido pela loja.</p>
       </div>
       <div class="faq-item">
+        <h4>Como falar com o suporte?</h4>
+        <p>O suporte da loja foi direcionado para o Discord oficial da NUTSS, facilitando o atendimento.</p>
+      </div>
+      <div class="faq-item">
         <h4>Quanto tempo demora a confirmação?</h4>
         <p>O prazo pode variar conforme a validação do pagamento, mas a estrutura da loja está preparada para atendimento rápido.</p>
       </div>
       <div class="faq-item">
-        <h4>Posso abrir suporte após comprar?</h4>
-        <p>Sim. A área de ticket foi colocada para organizar dúvidas, problemas e pedidos de suporte pós-compra.</p>
-      </div>
-      <div class="faq-item">
-        <h4>Como funciona o código de acesso do ticket?</h4>
-        <p>Nesta versão, ele está como campo visual do sistema. Para validação real e privada, depois precisa integrar com backend.</p>
+        <h4>O pedido tem número automático?</h4>
+        <p>Sim. A loja gera um número automático de pedido para ajudar na organização do atendimento.</p>
       </div>
     </div>
 
@@ -1056,7 +1110,7 @@
       <h3>Aviso de entrega digital</h3>
       <p>
         Todos os itens exibidos nesta loja são tratados como produtos digitais. O cliente deve conferir o pedido antes de pagar,
-        manter o comprovante salvo e utilizar a área de suporte caso precise de atendimento.
+        manter o comprovante salvo e utilizar o suporte oficial da loja em caso de atendimento.
       </p>
     </div>
 
@@ -1064,15 +1118,14 @@
       <h3>Termos da loja</h3>
       <p>
         Ao comprar na NUTSS, o cliente declara que leu a descrição do produto e concorda com o fluxo digital da loja.
-        Pagamentos devem ser conferidos antes do envio. A estrutura visual de suporte e ticket pode ser aprimorada futuramente
-        com sistema privado, autenticação e registro real em banco de dados.
+        Pagamentos devem ser conferidos antes do envio. A organização visual da área do dono serve para gestão do pedido dentro da interface.
       </p>
     </div>
   </div>
 
   <div class="footer">
     NUTSS STORE © 2026 — Loja digital com visual gamer premium.<br />
-    Layout profissional, produtos digitais, pagamento por Pix e suporte pós-compra.
+    Layout final, suporte oficial via Discord e fluxo de pagamento por Pix.
   </div>
 
   <script>
@@ -1165,23 +1218,24 @@
       status.innerHTML = 'Comprovante registrado no site: <strong>' + arquivo.name + '</strong>';
     }
 
-    function abrirTicket() {
+    function salvarPainelDono() {
       const pedido = document.getElementById('pedidoInput').value.trim();
       const codigo = document.getElementById('codigoInput').value.trim();
-      const assunto = document.getElementById('assuntoInput').value.trim();
-      const mensagem = document.getElementById('mensagemInput').value.trim();
-      const status = document.getElementById('ticketStatus');
+      const statusPedido = document.getElementById('statusInput').value.trim();
+      const obs = document.getElementById('obsInput').value.trim();
+      const status = document.getElementById('ownerStatus');
 
-      if (!pedido || !codigo || !assunto || !mensagem) {
-        status.textContent = 'Preencha todos os campos do ticket antes de enviar.';
+      if (!pedido) {
+        status.textContent = 'Abra o pagamento para gerar o número do pedido.';
         return;
       }
 
       status.innerHTML = `
-        Ticket aberto com sucesso.<br>
+        Organização salva.<br>
         Pedido: <strong>${pedido}</strong><br>
-        Assunto: <strong>${assunto}</strong><br>
-        Status: aguardando retorno do suporte.
+        Código do cliente: <strong>${codigo || 'não informado'}</strong><br>
+        Status: <strong>${statusPedido || 'não informado'}</strong><br>
+        Observações: <strong>${obs || 'sem observações'}</strong>
       `;
     }
 
