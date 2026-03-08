@@ -1,172 +1,911 @@
-import { useState } from 'react';
-import { Copy, Check, ShoppingCart, Gamepad2, MessageCircle } from 'lucide-react';
-
-export default function NutssLojaFacil() {
-  const pixKey = '6efe29f8-4de2-47b6-93e0-40fce6ead3d7';
-  const whatsapp = '5599999999999';
-
-  const products = [
-    { id: 1, name: 'Conta Free Fire Premium (Angelical, passes, punhos e muito mais)', price: 300.0 },
-    { id: 2, name: 'Discord Nitro', price: 12.0 },
-    { id: 3, name: 'Steam Key Aleatória', price: 12.9 },
-    { id: 4, name: 'Gift Card Gamer', price: 49.9 },
-    { id: 5, name: 'Rockstar GTA V (Rockstar Launcher)', price: 65.1 },
-    { id: 6, name: 'Red Dead Redemption 2', price: 89.9 }
-  ];
-
-  const [selectedProduct, setSelectedProduct] = useState(null);
-  const [copied, setCopied] = useState(false);
-
-  const openBuy = (product) => {
-    setSelectedProduct(product);
-    setCopied(false);
-    document.getElementById('pagamento')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
-  const copyPix = async () => {
-    try {
-      await navigator.clipboard.writeText(pixKey);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch (e) {
-      console.error(e);
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NUTSS STORE</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
     }
-  };
 
-  const formatBRL = (value) =>
-    value.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+    html { scroll-behavior: smooth; }
 
-  const whatsappText = selectedProduct
-    ? `Olá, quero confirmar a compra de ${selectedProduct.name} no valor de ${formatBRL(selectedProduct.price)}.`
-    : 'Olá, quero comprar na NUTSS.';
+    body {
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.08), transparent 20%),
+        radial-gradient(circle at top right, rgba(255,0,76,0.06), transparent 20%),
+        #050507;
+      color: #fff;
+    }
 
-  return (
-    <div className="min-h-screen bg-[#09090d] text-white">
-      <header className="border-b border-white/10 bg-black/60 backdrop-blur">
-        <div className="mx-auto flex max-w-6xl items-center justify-between px-6 py-4">
-          <div className="flex items-center gap-3">
-            <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-fuchsia-600 to-red-500">
-              <Gamepad2 className="h-5 w-5" />
-            </div>
-            <div>
-              <h1 className="text-2xl font-black tracking-[0.2em]">NUTSS</h1>
-              <p className="text-xs text-fuchsia-300">Loja gamer digital</p>
-            </div>
-          </div>
-          <a
-            href="#produtos"
-            className="rounded-2xl bg-gradient-to-r from-fuchsia-600 to-red-500 px-4 py-2 text-sm font-bold"
-          >
-            Ver produtos
-          </a>
+    a { text-decoration: none; color: inherit; }
+
+    header {
+      background: rgba(13, 13, 18, 0.88);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(14px);
+    }
+
+    .topbar {
+      max-width: 1260px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .logo-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #8a2be2, #ff0059);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      font-weight: bold;
+      box-shadow: 0 0 25px rgba(255, 0, 89, 0.28);
+    }
+
+    .logo-text h1 {
+      font-size: 33px;
+      letter-spacing: 2px;
+      color: #fff;
+    }
+
+    .logo-text p {
+      color: #d36cff;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-buttons button,
+    .nav-buttons a,
+    .btn,
+    .buy-btn,
+    .copy-btn,
+    .send-btn,
+    .clear-btn,
+    .discord-btn,
+    .owner-btn {
+      background: linear-gradient(90deg, #8a2be2, #ff0059);
+      color: white;
+      border: none;
+      padding: 12px 16px;
+      border-radius: 14px;
+      cursor: pointer;
+      font-weight: bold;
+      transition: 0.24s ease;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .nav-buttons button:hover,
+    .nav-buttons a:hover,
+    .btn:hover,
+    .buy-btn:hover,
+    .copy-btn:hover,
+    .send-btn:hover,
+    .discord-btn:hover,
+    .owner-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 28px rgba(255, 0, 89, 0.2);
+    }
+
+    .clear-btn {
+      background: #1b1c27;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .hero {
+      max-width: 1260px;
+      margin: 24px auto 0;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+    }
+
+    .hero-left {
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.22), transparent 32%),
+        radial-gradient(circle at bottom right, rgba(255,0,89,0.12), transparent 32%),
+        linear-gradient(135deg, #10121b, #090a10);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 38px;
+      box-shadow: 0 0 40px rgba(138,43,226,0.08);
+      overflow: hidden;
+      position: relative;
+      min-height: 420px;
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #f1c8ff;
+      border: 1px solid rgba(211,108,255,0.25);
+      background: rgba(211,108,255,0.08);
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      font-size: 58px;
+      line-height: 1.02;
+      margin-bottom: 16px;
+      max-width: 720px;
+    }
+
+    .highlight {
+      background: linear-gradient(90deg, #d36cff, #ff4b8b);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #c8c8d3;
+      font-size: 17px;
+      margin-bottom: 24px;
+      max-width: 690px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 24px;
+    }
+
+    .ff-banner {
+      margin-top: 16px;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top left, rgba(255,110,0,0.25), transparent 30%),
+        radial-gradient(circle at bottom right, rgba(255,0,89,0.18), transparent 35%),
+        linear-gradient(135deg, #1a0f14, #0b0c14);
+      padding: 22px;
+      box-shadow: inset 0 0 40px rgba(255,255,255,0.02);
+    }
+
+    .ff-banner-top {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .ff-banner-badge {
+      display: inline-block;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+
+    .ff-banner h3 {
+      font-size: 34px;
+      margin-bottom: 8px;
+    }
+
+    .ff-banner p {
+      margin: 0;
+      color: #d7d7e6;
+      max-width: 620px;
+    }
+
+    .ff-price {
+      font-size: 40px;
+      font-weight: bold;
+      margin-top: 12px;
+      color: #fff;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .mini-hero-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 18px;
+      padding: 16px;
+      transition: 0.22s ease;
+    }
+
+    .mini-hero-box:hover {
+      transform: translateY(-2px);
+      border-color: rgba(211,108,255,0.35);
+    }
+
+    .mini-hero-box strong {
+      display: block;
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .mini-hero-box span {
+      color: #bebed0;
+      font-size: 13px;
+    }
+
+    .hero-card {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 30px;
+      padding: 24px;
+      box-shadow: 0 0 35px rgba(255,0,89,0.08);
+    }
+
+    .hero-card h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .hero-card p {
+      color: #c5c5cf;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .featured {
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.24), transparent 35%),
+        radial-gradient(circle at bottom right, rgba(255,0,89,0.14), transparent 35%),
+        linear-gradient(135deg, #161622, #0e0f16);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 20px;
+      margin-top: 10px;
+    }
+
+    .featured .label {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      font-size: 12px;
+    }
+
+    .featured h4 {
+      font-size: 30px;
+      margin-bottom: 8px;
+    }
+
+    .featured .price {
+      font-size: 36px;
+      font-weight: bold;
+      margin: 16px 0 12px;
+    }
+
+    .trust-section {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .trust-box,
+    .stat-box,
+    .product,
+    .review-card,
+    .panel,
+    .faq-item,
+    .owner-box,
+    .step {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      transition: 0.24s ease;
+    }
+
+    .trust-box:hover,
+    .stat-box:hover,
+    .product:hover,
+    .review-card:hover,
+    .panel:hover,
+    .faq-item:hover,
+    .owner-box:hover,
+    .step:hover {
+      transform: translateY(-3px);
+      border-color: rgba(211,108,255,0.35);
+    }
+
+    .trust-box { padding: 20px; }
+
+    .trust-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, rgba(138,43,226,0.22), rgba(255,0,89,0.2));
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .trust-box strong {
+      display: block;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .trust-box p {
+      color: #bfbfca;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .stats {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .stat-box { padding: 24px; }
+
+    .stat-box h3 {
+      font-size: 34px;
+      margin-bottom: 6px;
+      color: #fff;
+    }
+
+    .stat-box p {
+      color: #bfbfca;
+      font-size: 14px;
+    }
+
+    .online-badge {
+      color: #91ff91;
+      font-weight: bold;
+    }
+
+    .container {
+      max-width: 1260px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 36px;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: #bdbdc8;
+      margin-bottom: 24px;
+      line-height: 1.6;
+    }
+
+    .controls {
+      display: grid;
+      grid-template-columns: 1fr 260px;
+      gap: 14px;
+      margin-bottom: 24px;
+    }
+
+    .search-input,
+    .filter-select,
+    .proof-input,
+    .owner-input,
+    .owner-textarea {
+      width: 100%;
+      padding: 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0d0e14;
+      color: #fff;
+      outline: none;
+    }
+
+    .owner-textarea {
+      min-height: 110px;
+      resize: vertical;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+      animation: fadeUp 0.5s ease both;
+    }
+
+    .product:nth-child(2) { animation-delay: 0.05s; }
+    .product:nth-child(3) { animation-delay: 0.1s; }
+    .product:nth-child(4) { animation-delay: 0.15s; }
+    .product:nth-child(5) { animation-delay: 0.2s; }
+    .product:nth-child(6) { animation-delay: 0.25s; }
+
+    .product-top {
+      height: 190px;
+      display: flex;
+      align-items: end;
+      justify-content: space-between;
+      padding: 16px;
+      background:
+        radial-gradient(circle at top left, rgba(138,43,226,0.35), transparent 40%),
+        radial-gradient(circle at bottom right, rgba(255,0,89,0.2), transparent 40%),
+        linear-gradient(135deg, #1a1a25, #111118);
+    }
+
+    .product-emoji {
+      font-size: 54px;
+      filter: drop-shadow(0 0 18px rgba(255,255,255,0.08));
+    }
+
+    .badge {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .badge-rare {
+      background: linear-gradient(90deg, #ff7a00, #ff0059);
+      border: none;
+    }
+
+    .product-body {
+      padding: 18px;
+    }
+
+    .category {
+      color: #d36cff;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .product h3 {
+      font-size: 22px;
+      margin-bottom: 8px;
+    }
+
+    .subtitle {
+      color: #f4d6ff;
+      font-size: 13px;
+      margin-bottom: 12px;
+    }
+
+    .desc {
+      color: #c4c4ce;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 74px;
+    }
+
+    .product-footer {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      font-size: 13px;
+      color: #bdbdd0;
+    }
+
+    .price-row {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .reviews {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .review-card { padding: 22px; }
+
+    .stars {
+      color: #ffd34d;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .review-card h4 {
+      margin-bottom: 6px;
+      font-size: 18px;
+    }
+
+    .review-meta {
+      color: #9f9fb0;
+      font-size: 13px;
+      margin-bottom: 10px;
+    }
+
+    .review-card p {
+      color: #c5c5cf;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .cart-section {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .panel { padding: 24px; }
+
+    .panel h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .panel p {
+      color: #c4c4ce;
+      line-height: 1.6;
+    }
+
+    .cart-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cart-item-name { font-weight: bold; }
+
+    .checkout-box {
+      margin-top: 18px;
+      background: linear-gradient(135deg, rgba(138,43,226,0.12), rgba(255,0,89,0.08));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .checkout-box .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: #d9d9e2;
+    }
+
+    .checkout-box .row.total {
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .payment-area {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .pix-key {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      word-break: break-all;
+      color: #f0f0f4;
+    }
+
+    .discord-box,
+    .owner-box {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 18px;
+    }
+
+    .discord-btn {
+      width: 100%;
+      margin-top: 14px;
+      font-size: 15px;
+    }
+
+    .discord-icon { font-size: 18px; }
+
+    .proof-status {
+      margin-top: 12px;
+      color: #d7d7e6;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .owner-grid {
+      display: grid;
+      gap: 12px;
+      margin-top: 14px;
+    }
+
+    .owner-status {
+      margin-top: 12px;
+      color: #d7d7e6;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .how-it-works {
+      margin-top: 40px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .step { padding: 20px; }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(90deg, #8a2be2, #ff0059);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: bold;
+      margin-bottom: 12px;
+    }
+
+    .step h4 {
+      font-size: 18px;
+      margin-bottom: 8px;
+    }
+
+    .step p {
+      color: #c0c0cb;
+      line-height: 1.5;
+      font-size: 14px;
+    }
+
+    .faq {
+      margin-top: 40px;
+      display: grid;
+      gap: 14px;
+    }
+
+    .faq-item { padding: 18px; }
+
+    .faq-item h4 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .faq-item p {
+      color: #c3c3cf;
+      line-height: 1.6;
+      font-size: 14px;
+    }
+
+    .delivery-note,
+    .terms-box {
+      margin-top: 30px;
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .delivery-note h3,
+    .terms-box h3 {
+      font-size: 24px;
+      margin-bottom: 10px;
+    }
+
+    .delivery-note p,
+    .terms-box p {
+      color: #c6c6d1;
+      line-height: 1.7;
+      font-size: 14px;
+    }
+
+    .footer {
+      max-width: 1260px;
+      margin: 40px auto 0;
+      padding: 22px 20px 36px;
+      color: #a8a8b8;
+      text-align: center;
+      font-size: 14px;
+      line-height: 1.8;
+    }
+
+    @keyframes fadeUp {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @media (max-width: 1250px) {
+      .products { grid-template-columns: repeat(3, 1fr); }
+      .trust-section, .stats, .how-it-works { grid-template-columns: repeat(2, 1fr); }
+      .reviews { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 900px) {
+      .hero, .cart-section, .payment-area, .controls {
+        grid-template-columns: 1fr;
+      }
+
+      .products, .reviews, .trust-section, .stats, .how-it-works, .hero-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .hero h2 { font-size: 40px; }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-buttons {
+        width: 100%;
+      }
+
+      .nav-buttons a,
+      .nav-buttons button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="topbar">
+      <div class="logo">
+        <div class="logo-icon">N</div>
+        <div class="logo-text">
+          <h1>NUTSS</h1>
+          <p>STORE GAMER PREMIUM</p>
         </div>
-      </header>
+      </div>
 
-      <main className="mx-auto max-w-6xl px-6 py-10">
-        <section className="grid gap-8 lg:grid-cols-2 lg:items-center">
-          <div>
-            <p className="inline-block rounded-full border border-fuchsia-500/30 bg-fuchsia-500/10 px-4 py-1 text-xs font-semibold text-fuchsia-200">
-              Site simples e bonito
-            </p>
-            <h2 className="mt-5 text-4xl font-black leading-tight md:text-5xl">
-              Loja fácil de usar, com compra rápida e Pix
-            </h2>
-            <p className="mt-4 text-white/70">
-              Modelo mais simples, mais leve e mais fácil para você usar. O cliente escolhe o produto, abre o pagamento e copia a chave Pix com um clique.
-            </p>
-            <div className="mt-6 flex flex-wrap gap-3">
-              <a
-                href="#produtos"
-                className="rounded-2xl bg-white px-5 py-3 font-bold text-black"
-              >
-                Escolher produto
-              </a>
-              <a
-                href={`https://wa.me/${whatsapp}?text=${encodeURIComponent('Olá, quero comprar na NUTSS.')}`}
-                className="rounded-2xl border border-white/15 px-5 py-3 font-semibold text-white/90"
-              >
-                WhatsApp
-              </a>
-            </div>
-          </div>
-
-          <div className="rounded-[2rem] border border-white/10 bg-white/5 p-5 shadow-2xl">
-            <div className="rounded-[1.5rem] bg-gradient-to-br from-fuchsia-600/20 to-red-500/20 p-6">
-              <h3 className="text-2xl font-black">Pagamento rápido</h3>
-              <p className="mt-2 text-white/70">Seu cliente clica em comprar, copia o Pix e envia o comprovante.</p>
-              <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4">
-                <p className="text-sm text-white/60">Chave Pix</p>
-                <p className="mt-2 break-all text-sm">{pixKey}</p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section id="produtos" className="mt-14">
-          <h3 className="text-3xl font-black">Produtos</h3>
-          <p className="mt-2 text-white/60">Catálogo simples para começar rápido.</p>
-
-          <div className="mt-6 grid gap-5 md:grid-cols-2 xl:grid-cols-4">
-            {products.map((product) => (
-              <div key={product.id} className="rounded-[1.6rem] border border-white/10 bg-white/5 p-4">
-                <div className="h-36 rounded-[1.2rem] bg-gradient-to-br from-fuchsia-600/20 to-red-500/20" />
-                <h4 className="mt-4 text-lg font-black">{product.name}</h4>
-                <p className="mt-2 text-2xl font-black text-fuchsia-300">{formatBRL(product.price)}</p>
-                <button
-                  onClick={() => openBuy(product)}
-                  className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-600 to-red-500 px-4 py-3 font-bold"
-                >
-                  <ShoppingCart className="h-4 w-4" />
-                  Comprar
-                </button>
-              </div>
-            ))}
-          </div>
-        </section>
-
-        <section id="pagamento" className="mt-14">
-          <div className="grid gap-6 lg:grid-cols-2">
-            <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-6">
-              <p className="text-sm text-fuchsia-300">Produto selecionado</p>
-              <h3 className="mt-2 text-3xl font-black">{selectedProduct ? selectedProduct.name : 'Escolha um produto'}</h3>
-              <p className="mt-3 text-white/60">
-                {selectedProduct
-                  ? `Valor: ${formatBRL(selectedProduct.price)}`
-                  : 'Clique em comprar em qualquer produto para abrir o pagamento.'}
-              </p>
-
-              <div className="mt-5 rounded-2xl border border-white/10 bg-black/30 p-4">
-                <p className="text-sm text-white/60">Chave Pix</p>
-                <p className="mt-2 break-all text-sm">{pixKey}</p>
-              </div>
-
-              <button
-                onClick={copyPix}
-                className="mt-4 flex w-full items-center justify-center gap-2 rounded-2xl bg-white px-4 py-3 font-bold text-black"
-              >
-                {copied ? <Check className="h-4 w-4" /> : <Copy className="h-4 w-4" />}
-                {copied ? 'Pix copiado' : 'Copiar chave Pix'}
-              </button>
-            </div>
-
-            <div className="rounded-[1.8rem] border border-white/10 bg-white/5 p-6">
-              <p className="text-sm text-red-300">Finalização</p>
-              <h3 className="mt-2 text-3xl font-black">Confirmar no WhatsApp</h3>
-              <p className="mt-3 text-white/60">
-                Depois do pagamento, o cliente pode falar direto no WhatsApp para enviar o comprovante.
-              </p>
-
-              <a
-                href={`https://wa.me/${whatsapp}?text=${encodeURIComponent(whatsappText)}`}
-                className="mt-6 flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-fuchsia-600 to-red-500 px-4 py-3 font-bold"
-              >
-                <MessageCircle className="h-4 w-4" />
-                Enviar comprovante
-              </a>
-            </div>
-          </div>
-        </section>
-      </main>
+      <div class="nav-buttons">
+        <a href="#produtos">Produtos</a>
+        <a href="#avaliacoes">Avaliações</a>
+        <a href="#faq">FAQ</a>
+        <button onclick="abrirCarrinho()">Carrinho</button>
+      </div>
     </div>
-  );
-}
+  </header>
+
+  <section class="hero">
+    <div class="hero-left">
+      <div class="tag">LOJA DIGITAL PROFISSIONAL</div>
+      <h2>A versão final da <span class="highlight">NUTSS premium</span></h2>
+      <p>
+        Uma loja mais forte visualmente, com banner Free Fire em destaque, cards premium,
+        busca, filtro, contador de vendas por produto, suporte via Discord e área do dono organizada.
+      </p>
+
+      <div class="hero-actions">
+        <a class="btn" href="#produtos">Ver produtos</a>
+        <button class="btn" onclick="abrirCarrinho()">Abrir pagamento</button>
+      </div>
+
+      <div class="ff-banner">
+        <div class="ff-banner-top">
+          <div>
+            <div class="ff-banner-badge">FREE FIRE • CONTA RARA</div>
+            <h3>Conta Free Fire Premium</h3>
+            <p>Angelical, passes, punhos e muito mais. Ideal para começar jogando com uma conta premium em destaque na loja.</p>
+            <div class="ff-price">R$ 300,00</div>
+          </div>
+          <button class="btn" onclick="comprarDireto('Conta Free Fire Premium', 300)">Comprar agora</button>
+        </div>
+      </div>
+
+      <div class="hero-grid">
+        <div class="mini-hero-box">
+          <strong id="onlineCount">128</strong>
+          <span>clientes online agora</span>
+        </div>
+        <div class="mini-hero-box">
+          <strong>24h</strong>
+          <span>entrega digital</span>
+        </div>
+        <div class="mini-hero-box">
+          <strong>4.9/5</strong>
+          <span>nota média da loja</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-card">
+      <h3>Produto em destaque</h3>
+      <p>Seu item principal no topo, com mais peso visual e botão de compra rápido.</p>
+
+      <div class="featured">
+        <div class="label">DESTAQUE DA LOJA</div>
+        <h4>Conta Free Fire Premium</h4>
+        <p>Conta premium anunciada com Angelical, passes, punhos e muito mais.</p>
+        <div class="price">R$ 300,00</div>
+        <button class="btn" onclick="comprarDireto('Conta Free Fire Premium', 300)">Comprar agora</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="trust-section">
+    <div class="trust-box">
+      <div class="trust-icon">⚡</div>
+      <strong>Entrega rápida</strong>
+      <p>Fluxo simples e direto para o cliente encontrar o produto e finalizar mais rápido.</p>
+    </div>
+    <div class="trust-box">
+      <div class="trust-icon">🔒</div>
+      <strong>Pagamento seguro</strong>
+      <p>Área de pagamento por Pix com cópia fácil da chave e processo visual o
