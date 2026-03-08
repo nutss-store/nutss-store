@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>NUTSS STORE</title>
+
+<style>
+body{
+background:#0a0a0a;
+color:white;
+font-family:Arial;
+text-align:center;
+}
+
+header{
+background:#111;
+padding:20px;
+font-size:30px;
+color:#ff004c;
+}
+
+.produto{
+background:#151515;
+margin:20px;
+padding:20px;
+border-radius:10px;
+display:inline-block;
+width:200px;
+}
+
+button{
+background:#ff004c;
+border:none;
+padding:10px;
+color:white;
+border-radius:5px;
+cursor:pointer;
+}
+
+.pix{
+margin-top:40px;
+background:#111;
+padding:20px;
+}
+
+</style>
+
+</head>
+
+<body>
+
+<header>NUTSS STORE</header>
+
+<h2>Keys e Produtos Gamer</h2>
+
+<div class="produto">
+<h3>Steam Key Aleatória</h3>
+<p>R$12,90</p>
+<button onclick="comprar()">Comprar</button>
+</div>
+
+<div class="produto">
+<h3>Discord Nitro</h3>
+<p>R$12,00</p>
+<button onclick="comprar()">Comprar</button>
+</div>
+
+<div class="produto">
+<h3>Red Dead 2</h3>
+<p>R$89,90</p>
+<button onclick="comprar()">Comprar</button>
+</div>
+
+<div class="pix" id="pix" style="display:none;">
+<h2>Pagamento PIX</h2>
+<p id="chave">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</p>
+
+<button onclick="copiar()">Copiar Chave Pix</button>
+</div>
+
+<script>
+
+function comprar(){
+document.getElementById("pix").style.display="block";
+}
+
+function copiar(){
+var chave=document.getElementById("chave").innerText;
+navigator.clipboard.writeText(chave);
+alert("Chave Pix copiada!");
+}
+
+</script>
+
+</body>
+</html>
+
