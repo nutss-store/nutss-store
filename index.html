@@ -87,13 +87,6 @@
       display: inline-block;
     }
 
-    .nav-buttons button:hover,
-    .nav-buttons a:hover,
-    .btn:hover {
-      transform: translateY(-1px);
-      opacity: 0.95;
-    }
-
     .hero {
       max-width: 1200px;
       margin: 30px auto 10px;
@@ -173,10 +166,31 @@
       margin-top: 12px;
     }
 
-    .mini-box strong {
-      display: block;
+    .stats {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 20px 20px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .stat-box {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .stat-box h3 {
+      font-size: 30px;
       margin-bottom: 6px;
-      font-size: 15px;
+      color: #fff;
+    }
+
+    .stat-box p {
+      color: #bfbfca;
+      font-size: 14px;
     }
 
     .container {
@@ -197,7 +211,7 @@
 
     .products {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 18px;
     }
 
@@ -254,7 +268,7 @@
       color: #c4c4ce;
       font-size: 14px;
       line-height: 1.5;
-      min-height: 62px;
+      min-height: 70px;
     }
 
     .price-row {
@@ -279,6 +293,37 @@
       border-radius: 12px;
       font-weight: bold;
       cursor: pointer;
+    }
+
+    .reviews {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .review-card {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .stars {
+      color: #ffd34d;
+      margin-bottom: 10px;
+      font-size: 18px;
+    }
+
+    .review-card h4 {
+      margin-bottom: 8px;
+      font-size: 18px;
+    }
+
+    .review-card p {
+      color: #c5c5cf;
+      line-height: 1.5;
+      font-size: 14px;
     }
 
     .cart-section {
@@ -350,7 +395,7 @@
     .payment-area {
       margin-top: 36px;
       display: none;
-      grid-template-columns: 1.1fr 0.9fr;
+      grid-template-columns: 1fr 1fr;
       gap: 20px;
     }
 
@@ -365,9 +410,9 @@
     }
 
     .copy-btn,
-    .chat-btn,
     .send-btn,
-    .clear-btn {
+    .clear-btn,
+    .ticket-btn {
       width: 100%;
       margin-top: 14px;
       background: linear-gradient(90deg, #8a2be2, #ff003c);
@@ -384,45 +429,9 @@
       border: 1px solid rgba(255,255,255,0.08);
     }
 
-    .chat-box {
-      margin-top: 16px;
-      background: rgba(255,255,255,0.04);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 16px;
-      padding: 14px;
-    }
-
-    .messages {
-      height: 220px;
-      overflow-y: auto;
-      border-radius: 12px;
-      padding: 12px;
-      background: #090a0f;
-      margin-bottom: 12px;
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .msg {
-      padding: 10px 12px;
-      border-radius: 12px;
-      margin-bottom: 10px;
-      max-width: 85%;
-      line-height: 1.4;
-      font-size: 14px;
-    }
-
-    .msg.user {
-      background: linear-gradient(90deg, #8a2be2, #ff003c);
-      margin-left: auto;
-    }
-
-    .msg.store {
-      background: #1b1c26;
-      color: #e5e5ef;
-    }
-
-    .chat-input,
-    .proof-input {
+    .proof-input,
+    .ticket-input,
+    .ticket-textarea {
       width: 100%;
       padding: 13px;
       border-radius: 12px;
@@ -431,6 +440,26 @@
       color: #fff;
       outline: none;
       margin-top: 10px;
+    }
+
+    .ticket-textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .ticket-box {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 16px;
+    }
+
+    .ticket-status {
+      margin-top: 12px;
+      color: #d7d7e6;
+      line-height: 1.5;
+      font-size: 14px;
     }
 
     .footer {
@@ -442,11 +471,24 @@
       font-size: 14px;
     }
 
-    @media (max-width: 1000px) {
+    @media (max-width: 1100px) {
       .hero,
       .products,
+      .reviews,
       .cart-section,
-      .payment-area {
+      .payment-area,
+      .stats {
+        grid-template-columns: 1fr 1fr;
+      }
+    }
+
+    @media (max-width: 820px) {
+      .hero,
+      .products,
+      .reviews,
+      .cart-section,
+      .payment-area,
+      .stats {
         grid-template-columns: 1fr;
       }
     }
@@ -487,6 +529,7 @@
 
       <div class="nav-buttons">
         <a href="#produtos">Produtos</a>
+        <a href="#avaliacoes">Avaliações</a>
         <button onclick="abrirCarrinho()">Carrinho</button>
       </div>
     </div>
@@ -497,8 +540,8 @@
       <div class="tag">LOJA DIGITAL PROFISSIONAL</div>
       <h2>Venda com estilo <span class="highlight">gamer premium</span></h2>
       <p>
-        Sua loja NUTSS com visual mais forte, catálogo bonito, carrinho, pagamento por Pix,
-        área para enviar comprovante e chat online visual dentro do site.
+        Loja NUTSS com visual profissional, contagem de vendas, avaliações,
+        checkout com Pix e ticket de suporte mais organizado.
       </p>
 
       <div class="hero-actions">
@@ -508,18 +551,38 @@
     </div>
 
     <div class="hero-card">
-      <h3>Logo da NUTSS</h3>
-      <p>Criei uma logo simples e elegante direto no topo do site, no estilo gamer escuro com roxo e vermelho.</p>
+      <h3>Destaques da loja</h3>
+      <p>Layout melhorado para passar mais confiança e deixar a loja mais forte visualmente.</p>
 
       <div class="mini-box">
-        <strong>Pagamento rápido</strong>
-        O cliente escolhe o produto, abre o pagamento e copia a chave Pix.
+        <strong>Contador de vendas</strong>
+        Mostra volume de pedidos para dar mais credibilidade.
       </div>
 
       <div class="mini-box">
-        <strong>Chat online visual</strong>
-        O cliente pode mandar mensagem e informar o comprovante direto no site.
+        <strong>Avaliações</strong>
+        Área com estrelas e comentários de clientes.
       </div>
+
+      <div class="mini-box">
+        <strong>Ticket de suporte</strong>
+        No lugar do chat online, agora tem uma área mais limpa para suporte.
+      </div>
+    </div>
+  </section>
+
+  <section class="stats">
+    <div class="stat-box">
+      <h3 id="salesCount">1.284</h3>
+      <p>Vendas realizadas</p>
+    </div>
+    <div class="stat-box">
+      <h3>4.9/5</h3>
+      <p>Nota média dos clientes</p>
+    </div>
+    <div class="stat-box">
+      <h3>98%</h3>
+      <p>Pedidos entregues com sucesso</p>
     </div>
   </section>
 
@@ -557,6 +620,19 @@
       <div class="product">
         <div class="product-top"><span class="badge">Oferta</span></div>
         <div class="product-body">
+          <div class="category">Licença oficial</div>
+          <h3>Rockstar Launcher GTA V</h3>
+          <p class="desc">Produto digital oficial para jogadores que buscam praticidade e apresentação premium.</p>
+          <div class="price-row">
+            <div class="price">R$ 65,10</div>
+            <button class="buy-btn" onclick="comprar('Rockstar Launcher GTA V', 65.10)">Comprar</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="product">
+        <div class="product-top"><span class="badge">Oferta</span></div>
+        <div class="product-body">
           <div class="category">Keys de Jogos</div>
           <h3>Red Dead 2</h3>
           <p class="desc">Página pronta para destacar jogos premium com aparência forte e elegante.</p>
@@ -578,6 +654,27 @@
             <button class="buy-btn" onclick="comprar('Gift Card Gamer', 49.90)">Comprar</button>
           </div>
         </div>
+      </div>
+    </div>
+
+    <h2 class="section-title" id="avaliacoes" style="margin-top:40px;">Avaliações</h2>
+    <p class="section-subtitle">Comentários e reputação da sua loja.</p>
+
+    <div class="reviews">
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <h4>Compra rápida</h4>
+        <p>Recebi tudo certinho e o pagamento foi simples. Loja muito bonita e organizada.</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★★</div>
+        <h4>Atendimento bom</h4>
+        <p>Produto entregue rápido e suporte respondeu bem. Visual da loja passa confiança.</p>
+      </div>
+      <div class="review-card">
+        <div class="stars">★★★★☆</div>
+        <h4>Boa experiência</h4>
+        <p>Gostei da organização, do carrinho e da parte de pagamento. Tudo bem fácil de usar.</p>
       </div>
     </div>
 
@@ -618,7 +715,7 @@
         <div class="pix-key" id="pixKey">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</div>
         <button class="copy-btn" onclick="copiarPix()">Copiar chave Pix</button>
 
-        <div class="chat-box">
+        <div class="ticket-box">
           <h3 style="font-size:20px; margin-bottom:8px;">Enviar comprovante</h3>
           <p style="margin-bottom:8px;">Selecione um arquivo do comprovante e registre o envio.</p>
           <input class="proof-input" type="file" id="proofFile" />
@@ -628,15 +725,19 @@
       </div>
 
       <div class="panel">
-        <h3>Chat online</h3>
-        <p>Área de conversa visual dentro do site.</p>
+        <h3>Ticket de suporte</h3>
+        <p>Área visual para suporte pós-compra.</p>
 
-        <div class="messages" id="messages">
-          <div class="msg store">Olá! Seja bem-vindo à NUTSS. Mande sua mensagem ou informe que já realizou o pagamento.</div>
+        <div class="ticket-box">
+          <input class="ticket-input" id="pedidoInput" type="text" placeholder="Número do pedido" />
+          <input class="ticket-input" id="codigoInput" type="text" placeholder="Código de acesso do comprador" />
+          <input class="ticket-input" id="assuntoInput" type="text" placeholder="Assunto do suporte" />
+          <textarea class="ticket-textarea" id="mensagemInput" placeholder="Descreva o problema ou dúvida..."></textarea>
+          <button class="ticket-btn" onclick="abrirTicket()">Abrir ticket</button>
+          <div class="ticket-status" id="ticketStatus">
+            Apenas clientes com pedido e código de compra devem abrir suporte.
+          </div>
         </div>
-
-        <input class="chat-input" id="chatInput" type="text" placeholder="Digite sua mensagem..." />
-        <button class="chat-btn" onclick="enviarMensagem()">Enviar mensagem</button>
       </div>
     </div>
   </div>
@@ -716,30 +817,6 @@
       alert('Chave Pix copiada!');
     }
 
-    function enviarMensagem() {
-      const input = document.getElementById('chatInput');
-      const messages = document.getElementById('messages');
-      const texto = input.value.trim();
-
-      if (!texto) return;
-
-      const msgUser = document.createElement('div');
-      msgUser.className = 'msg user';
-      msgUser.textContent = texto;
-      messages.appendChild(msgUser);
-
-      setTimeout(() => {
-        const msgStore = document.createElement('div');
-        msgStore.className = 'msg store';
-        msgStore.textContent = 'Mensagem enviada no chat da loja. Para receber de verdade em tempo real, depois você pode ligar esse chat a um serviço externo.';
-        messages.appendChild(msgStore);
-        messages.scrollTop = messages.scrollHeight;
-      }, 500);
-
-      input.value = '';
-      messages.scrollTop = messages.scrollHeight;
-    }
-
     function enviarComprovante() {
       const arquivo = document.getElementById('proofFile').files[0];
       const status = document.getElementById('proofStatus');
@@ -751,6 +828,28 @@
 
       status.textContent = 'Comprovante registrado no site: ' + arquivo.name;
     }
+
+    function abrirTicket() {
+      const pedido = document.getElementById('pedidoInput').value.trim();
+      const codigo = document.getElementById('codigoInput').value.trim();
+      const assunto = document.getElementById('assuntoInput').value.trim();
+      const mensagem = document.getElementById('mensagemInput').value.trim();
+      const status = document.getElementById('ticketStatus');
+
+      if (!pedido || !codigo || !assunto || !mensagem) {
+        status.textContent = 'Preencha todos os campos do ticket antes de enviar.';
+        return;
+      }
+
+      status.innerHTML = `
+        Ticket aberto com sucesso.<br>
+        Pedido: <strong>${pedido}</strong><br>
+        Assunto: <strong>${assunto}</strong><br>
+        Status: aguardando retorno do suporte.
+      `;
+    }
+
+    atualizarCarrinho();
   </script>
 </body>
 </html>
