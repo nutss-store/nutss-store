@@ -1,96 +1,756 @@
 <!DOCTYPE html>
-<html>
+<html lang="pt-BR">
 <head>
-<title>NUTSS STORE</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NUTSS STORE</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: Arial, sans-serif;
+    }
 
-<style>
-body{
-background:#0a0a0a;
-color:white;
-font-family:Arial;
-text-align:center;
-}
+    body {
+      background: #050507;
+      color: #fff;
+    }
 
-header{
-background:#111;
-padding:20px;
-font-size:30px;
-color:#ff004c;
-}
+    header {
+      background: linear-gradient(90deg, #0d0d12, #151522, #0d0d12);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      padding: 18px 24px;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+    }
 
-.produto{
-background:#151515;
-margin:20px;
-padding:20px;
-border-radius:10px;
-display:inline-block;
-width:200px;
-}
+    .topbar {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
 
-button{
-background:#ff004c;
-border:none;
-padding:10px;
-color:white;
-border-radius:5px;
-cursor:pointer;
-}
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
 
-.pix{
-margin-top:40px;
-background:#111;
-padding:20px;
-}
+    .logo-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: linear-gradient(135deg, #8a2be2, #ff003c);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 22px;
+      font-weight: bold;
+      box-shadow: 0 0 25px rgba(255, 0, 76, 0.25);
+    }
 
-</style>
+    .logo-text h1 {
+      font-size: 28px;
+      letter-spacing: 2px;
+      color: #fff;
+    }
 
+    .logo-text p {
+      color: #d36cff;
+      font-size: 12px;
+      letter-spacing: 2px;
+    }
+
+    .nav-buttons {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .nav-buttons button,
+    .nav-buttons a,
+    .btn {
+      background: linear-gradient(90deg, #8a2be2, #ff003c);
+      color: white;
+      border: none;
+      padding: 11px 16px;
+      border-radius: 12px;
+      cursor: pointer;
+      font-weight: bold;
+      text-decoration: none;
+      transition: 0.2s;
+      display: inline-block;
+    }
+
+    .nav-buttons button:hover,
+    .nav-buttons a:hover,
+    .btn:hover {
+      transform: translateY(-1px);
+      opacity: 0.95;
+    }
+
+    .hero {
+      max-width: 1200px;
+      margin: 30px auto 10px;
+      padding: 20px;
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 24px;
+    }
+
+    .hero-left {
+      background: linear-gradient(135deg, rgba(138,43,226,0.15), rgba(255,0,60,0.08));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 32px;
+      box-shadow: 0 0 40px rgba(138,43,226,0.08);
+    }
+
+    .tag {
+      display: inline-block;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 12px;
+      color: #f1c8ff;
+      border: 1px solid rgba(211,108,255,0.25);
+      background: rgba(211,108,255,0.08);
+      margin-bottom: 18px;
+    }
+
+    .hero h2 {
+      font-size: 46px;
+      line-height: 1.08;
+      margin-bottom: 14px;
+    }
+
+    .highlight {
+      background: linear-gradient(90deg, #d36cff, #ff4b6e);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p {
+      color: #c8c8d3;
+      font-size: 17px;
+      margin-bottom: 24px;
+      max-width: 650px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 0 35px rgba(255,0,76,0.08);
+    }
+
+    .hero-card h3 {
+      font-size: 22px;
+      margin-bottom: 12px;
+    }
+
+    .hero-card p {
+      color: #c5c5cf;
+      margin-bottom: 18px;
+    }
+
+    .mini-box {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.07);
+      border-radius: 16px;
+      padding: 14px;
+      margin-top: 12px;
+    }
+
+    .mini-box strong {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 15px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    .section-title {
+      font-size: 32px;
+      margin-bottom: 8px;
+    }
+
+    .section-subtitle {
+      color: #bdbdc8;
+      margin-bottom: 24px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+
+    .product {
+      background: linear-gradient(180deg, #101117, #0b0b10);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      overflow: hidden;
+      transition: 0.2s;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+    }
+
+    .product:hover {
+      transform: translateY(-3px);
+      border-color: rgba(211,108,255,0.4);
+    }
+
+    .product-top {
+      height: 170px;
+      background: radial-gradient(circle at top left, rgba(138,43,226,0.35), transparent 40%),
+                  radial-gradient(circle at bottom right, rgba(255,0,60,0.2), transparent 40%),
+                  linear-gradient(135deg, #1a1a25, #111118);
+      display: flex;
+      align-items: end;
+      padding: 16px;
+    }
+
+    .badge {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 12px;
+    }
+
+    .product-body {
+      padding: 18px;
+    }
+
+    .category {
+      color: #d36cff;
+      font-size: 12px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+    }
+
+    .product h3 {
+      font-size: 22px;
+      margin-bottom: 10px;
+    }
+
+    .desc {
+      color: #c4c4ce;
+      font-size: 14px;
+      line-height: 1.5;
+      min-height: 62px;
+    }
+
+    .price-row {
+      margin-top: 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .price {
+      font-size: 28px;
+      font-weight: bold;
+      color: #fff;
+    }
+
+    .buy-btn {
+      background: linear-gradient(90deg, #8a2be2, #ff003c);
+      border: none;
+      color: #fff;
+      padding: 11px 16px;
+      border-radius: 12px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .cart-section {
+      margin-top: 36px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .panel {
+      background: #0f1016;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 22px;
+      padding: 24px;
+    }
+
+    .panel h3 {
+      font-size: 24px;
+      margin-bottom: 12px;
+    }
+
+    .panel p {
+      color: #c4c4ce;
+    }
+
+    .cart-list {
+      margin-top: 18px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .cart-item {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+    }
+
+    .cart-item-name {
+      font-weight: bold;
+    }
+
+    .checkout-box {
+      margin-top: 18px;
+      background: linear-gradient(135deg, rgba(138,43,226,0.12), rgba(255,0,60,0.08));
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .checkout-box .row {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 10px;
+      color: #d9d9e2;
+    }
+
+    .checkout-box .row.total {
+      font-size: 22px;
+      font-weight: bold;
+      color: white;
+    }
+
+    .payment-area {
+      margin-top: 36px;
+      display: none;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 20px;
+    }
+
+    .pix-key {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 14px;
+      word-break: break-all;
+      color: #f0f0f4;
+    }
+
+    .copy-btn,
+    .chat-btn,
+    .send-btn,
+    .clear-btn {
+      width: 100%;
+      margin-top: 14px;
+      background: linear-gradient(90deg, #8a2be2, #ff003c);
+      border: none;
+      color: #fff;
+      padding: 14px;
+      border-radius: 14px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .clear-btn {
+      background: #1c1d27;
+      border: 1px solid rgba(255,255,255,0.08);
+    }
+
+    .chat-box {
+      margin-top: 16px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 14px;
+    }
+
+    .messages {
+      height: 220px;
+      overflow-y: auto;
+      border-radius: 12px;
+      padding: 12px;
+      background: #090a0f;
+      margin-bottom: 12px;
+      border: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .msg {
+      padding: 10px 12px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+      max-width: 85%;
+      line-height: 1.4;
+      font-size: 14px;
+    }
+
+    .msg.user {
+      background: linear-gradient(90deg, #8a2be2, #ff003c);
+      margin-left: auto;
+    }
+
+    .msg.store {
+      background: #1b1c26;
+      color: #e5e5ef;
+    }
+
+    .chat-input,
+    .proof-input {
+      width: 100%;
+      padding: 13px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.08);
+      background: #0d0e14;
+      color: #fff;
+      outline: none;
+      margin-top: 10px;
+    }
+
+    .footer {
+      max-width: 1200px;
+      margin: 40px auto 0;
+      padding: 22px 20px 36px;
+      color: #a8a8b8;
+      text-align: center;
+      font-size: 14px;
+    }
+
+    @media (max-width: 1000px) {
+      .hero,
+      .products,
+      .cart-section,
+      .payment-area {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h2 {
+        font-size: 34px;
+      }
+
+      .topbar {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .nav-buttons {
+        width: 100%;
+      }
+
+      .nav-buttons a,
+      .nav-buttons button {
+        width: 100%;
+        text-align: center;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<header>NUTSS STORE</header>
+  <header>
+    <div class="topbar">
+      <div class="logo">
+        <div class="logo-icon">N</div>
+        <div class="logo-text">
+          <h1>NUTSS</h1>
+          <p>STORE GAMER PREMIUM</p>
+        </div>
+      </div>
 
-<h2>Keys e Produtos Gamer</h2>
+      <div class="nav-buttons">
+        <a href="#produtos">Produtos</a>
+        <button onclick="abrirCarrinho()">Carrinho</button>
+      </div>
+    </div>
+  </header>
 
-<div class="produto">
-<h3>Steam Key Aleatória</h3>
-<p>R$12,90</p>
-<button onclick="comprar()">Comprar</button>
-</div>
+  <section class="hero">
+    <div class="hero-left">
+      <div class="tag">LOJA DIGITAL PROFISSIONAL</div>
+      <h2>Venda com estilo <span class="highlight">gamer premium</span></h2>
+      <p>
+        Sua loja NUTSS com visual mais forte, catálogo bonito, carrinho, pagamento por Pix,
+        área para enviar comprovante e chat online visual dentro do site.
+      </p>
 
-<div class="produto">
-<h3>Discord Nitro</h3>
-<p>R$12,00</p>
-<button onclick="comprar()">Comprar</button>
-</div>
+      <div class="hero-actions">
+        <a class="btn" href="#produtos">Ver produtos</a>
+        <button class="btn" onclick="abrirCarrinho()">Abrir pagamento</button>
+      </div>
+    </div>
 
-<div class="produto">
-<h3>Red Dead 2</h3>
-<p>R$89,90</p>
-<button onclick="comprar()">Comprar</button>
-</div>
+    <div class="hero-card">
+      <h3>Logo da NUTSS</h3>
+      <p>Criei uma logo simples e elegante direto no topo do site, no estilo gamer escuro com roxo e vermelho.</p>
 
-<div class="pix" id="pix" style="display:none;">
-<h2>Pagamento PIX</h2>
-<p id="chave">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</p>
+      <div class="mini-box">
+        <strong>Pagamento rápido</strong>
+        O cliente escolhe o produto, abre o pagamento e copia a chave Pix.
+      </div>
 
-<button onclick="copiar()">Copiar Chave Pix</button>
-</div>
+      <div class="mini-box">
+        <strong>Chat online visual</strong>
+        O cliente pode mandar mensagem e informar o comprovante direto no site.
+      </div>
+    </div>
+  </section>
 
-<script>
+  <div class="container">
+    <h2 class="section-title" id="produtos">Produtos</h2>
+    <p class="section-subtitle">Catálogo gamer profissional com destaque para compra rápida.</p>
 
-function comprar(){
-document.getElementById("pix").style.display="block";
-}
+    <div class="products">
+      <div class="product">
+        <div class="product-top"><span class="badge">Entrega digital</span></div>
+        <div class="product-body">
+          <div class="category">Keys de Jogos</div>
+          <h3>Steam Key Aleatória</h3>
+          <p class="desc">Produto digital para entrega rápida com visual profissional de vitrine.</p>
+          <div class="price-row">
+            <div class="price">R$ 12,90</div>
+            <button class="buy-btn" onclick="comprar('Steam Key Aleatória', 12.90)">Comprar</button>
+          </div>
+        </div>
+      </div>
 
-function copiar(){
-var chave=document.getElementById("chave").innerText;
-navigator.clipboard.writeText(chave);
-alert("Chave Pix copiada!");
-}
+      <div class="product">
+        <div class="product-top"><span class="badge">Mais vendido</span></div>
+        <div class="product-body">
+          <div class="category">Assinaturas</div>
+          <h3>Discord Nitro</h3>
+          <p class="desc">Item digital em destaque para venda rápida e apresentação mais bonita.</p>
+          <div class="price-row">
+            <div class="price">R$ 12,00</div>
+            <button class="buy-btn" onclick="comprar('Discord Nitro', 12.00)">Comprar</button>
+          </div>
+        </div>
+      </div>
 
-</script>
+      <div class="product">
+        <div class="product-top"><span class="badge">Oferta</span></div>
+        <div class="product-body">
+          <div class="category">Keys de Jogos</div>
+          <h3>Red Dead 2</h3>
+          <p class="desc">Página pronta para destacar jogos premium com aparência forte e elegante.</p>
+          <div class="price-row">
+            <div class="price">R$ 89,90</div>
+            <button class="buy-btn" onclick="comprar('Red Dead 2', 89.90)">Comprar</button>
+          </div>
+        </div>
+      </div>
 
+      <div class="product">
+        <div class="product-top"><span class="badge">Novo</span></div>
+        <div class="product-body">
+          <div class="category">Gift Cards</div>
+          <h3>Gift Card Gamer</h3>
+          <p class="desc">Seção ideal para adicionar novos produtos digitais na loja.</p>
+          <div class="price-row">
+            <div class="price">R$ 49,90</div>
+            <button class="buy-btn" onclick="comprar('Gift Card Gamer', 49.90)">Comprar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cart-section" id="carrinho">
+      <div class="panel">
+        <h3>Carrinho</h3>
+        <p>Os produtos adicionados aparecem aqui.</p>
+        <div class="cart-list" id="cartList">
+          <div style="color:#999;">Seu carrinho está vazio.</div>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Resumo do pedido</h3>
+        <p>Abra o pagamento para copiar o Pix e enviar o comprovante.</p>
+
+        <div class="checkout-box">
+          <div class="row">
+            <span>Subtotal</span>
+            <span id="subtotal">R$ 0,00</span>
+          </div>
+          <div class="row total">
+            <span>Total</span>
+            <span id="total">R$ 0,00</span>
+          </div>
+        </div>
+
+        <button class="copy-btn" onclick="abrirPagamento()">Abrir pagamento</button>
+        <button class="clear-btn" onclick="limparCarrinho()">Limpar carrinho</button>
+      </div>
+    </div>
+
+    <div class="payment-area" id="pagamentoArea">
+      <div class="panel">
+        <h3>Pagamento Pix</h3>
+        <p>Copie sua chave Pix abaixo para concluir o pedido.</p>
+
+        <div class="pix-key" id="pixKey">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</div>
+        <button class="copy-btn" onclick="copiarPix()">Copiar chave Pix</button>
+
+        <div class="chat-box">
+          <h3 style="font-size:20px; margin-bottom:8px;">Enviar comprovante</h3>
+          <p style="margin-bottom:8px;">Selecione um arquivo do comprovante e registre o envio.</p>
+          <input class="proof-input" type="file" id="proofFile" />
+          <button class="send-btn" onclick="enviarComprovante()">Registrar comprovante</button>
+          <p id="proofStatus" style="margin-top:10px; color:#cfcfe6;"></p>
+        </div>
+      </div>
+
+      <div class="panel">
+        <h3>Chat online</h3>
+        <p>Área de conversa visual dentro do site.</p>
+
+        <div class="messages" id="messages">
+          <div class="msg store">Olá! Seja bem-vindo à NUTSS. Mande sua mensagem ou informe que já realizou o pagamento.</div>
+        </div>
+
+        <input class="chat-input" id="chatInput" type="text" placeholder="Digite sua mensagem..." />
+        <button class="chat-btn" onclick="enviarMensagem()">Enviar mensagem</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="footer">
+    NUTSS STORE © 2026 — Loja digital com visual gamer premium.
+  </div>
+
+  <script>
+    const carrinho = [];
+
+    function formatarBRL(valor) {
+      return valor.toLocaleString('pt-BR', {
+        style: 'currency',
+        currency: 'BRL'
+      });
+    }
+
+    function comprar(nome, preco) {
+      carrinho.push({ nome, preco });
+      atualizarCarrinho();
+      document.getElementById('carrinho').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function atualizarCarrinho() {
+      const lista = document.getElementById('cartList');
+      const subtotal = document.getElementById('subtotal');
+      const total = document.getElementById('total');
+
+      lista.innerHTML = '';
+
+      if (carrinho.length === 0) {
+        lista.innerHTML = '<div style="color:#999;">Seu carrinho está vazio.</div>';
+      } else {
+        carrinho.forEach((item, index) => {
+          const div = document.createElement('div');
+          div.className = 'cart-item';
+          div.innerHTML = `
+            <div>
+              <div class="cart-item-name">${item.nome}</div>
+              <div style="color:#bdbdc8; font-size:14px;">${formatarBRL(item.preco)}</div>
+            </div>
+            <button class="buy-btn" onclick="removerItem(${index})">Remover</button>
+          `;
+          lista.appendChild(div);
+        });
+      }
+
+      const soma = carrinho.reduce((acc, item) => acc + item.preco, 0);
+      subtotal.textContent = formatarBRL(soma);
+      total.textContent = formatarBRL(soma);
+    }
+
+    function removerItem(index) {
+      carrinho.splice(index, 1);
+      atualizarCarrinho();
+    }
+
+    function limparCarrinho() {
+      carrinho.length = 0;
+      atualizarCarrinho();
+      document.getElementById('pagamentoArea').style.display = 'none';
+    }
+
+    function abrirCarrinho() {
+      document.getElementById('carrinho').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function abrirPagamento() {
+      document.getElementById('pagamentoArea').style.display = 'grid';
+      document.getElementById('pagamentoArea').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    function copiarPix() {
+      const chave = document.getElementById('pixKey').innerText;
+      navigator.clipboard.writeText(chave);
+      alert('Chave Pix copiada!');
+    }
+
+    function enviarMensagem() {
+      const input = document.getElementById('chatInput');
+      const messages = document.getElementById('messages');
+      const texto = input.value.trim();
+
+      if (!texto) return;
+
+      const msgUser = document.createElement('div');
+      msgUser.className = 'msg user';
+      msgUser.textContent = texto;
+      messages.appendChild(msgUser);
+
+      setTimeout(() => {
+        const msgStore = document.createElement('div');
+        msgStore.className = 'msg store';
+        msgStore.textContent = 'Mensagem enviada no chat da loja. Para receber de verdade em tempo real, depois você pode ligar esse chat a um serviço externo.';
+        messages.appendChild(msgStore);
+        messages.scrollTop = messages.scrollHeight;
+      }, 500);
+
+      input.value = '';
+      messages.scrollTop = messages.scrollHeight;
+    }
+
+    function enviarComprovante() {
+      const arquivo = document.getElementById('proofFile').files[0];
+      const status = document.getElementById('proofStatus');
+
+      if (!arquivo) {
+        status.textContent = 'Selecione um comprovante antes de enviar.';
+        return;
+      }
+
+      status.textContent = 'Comprovante registrado no site: ' + arquivo.name;
+    }
+  </script>
 </body>
 </html>
-
