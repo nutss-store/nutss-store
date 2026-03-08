@@ -141,7 +141,6 @@
       box-shadow: 0 0 40px rgba(138,43,226,0.08);
       overflow: hidden;
       position: relative;
-      min-height: 420px;
     }
 
     .tag {
@@ -159,7 +158,6 @@
       font-size: 58px;
       line-height: 1.02;
       margin-bottom: 16px;
-      max-width: 720px;
     }
 
     .highlight {
@@ -183,55 +181,6 @@
       margin-bottom: 24px;
     }
 
-    .ff-banner {
-      margin-top: 16px;
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      overflow: hidden;
-      background:
-        radial-gradient(circle at top left, rgba(255,110,0,0.25), transparent 30%),
-        radial-gradient(circle at bottom right, rgba(255,0,89,0.18), transparent 35%),
-        linear-gradient(135deg, #1a0f14, #0b0c14);
-      padding: 22px;
-      box-shadow: inset 0 0 40px rgba(255,255,255,0.02);
-    }
-
-    .ff-banner-top {
-      display: flex;
-      justify-content: space-between;
-      gap: 16px;
-      flex-wrap: wrap;
-      align-items: center;
-    }
-
-    .ff-banner-badge {
-      display: inline-block;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      font-size: 12px;
-      margin-bottom: 10px;
-    }
-
-    .ff-banner h3 {
-      font-size: 34px;
-      margin-bottom: 8px;
-    }
-
-    .ff-banner p {
-      margin: 0;
-      color: #d7d7e6;
-      max-width: 620px;
-    }
-
-    .ff-price {
-      font-size: 40px;
-      font-weight: bold;
-      margin-top: 12px;
-      color: #fff;
-    }
-
     .hero-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -244,12 +193,6 @@
       border: 1px solid rgba(255,255,255,0.07);
       border-radius: 18px;
       padding: 16px;
-      transition: 0.22s ease;
-    }
-
-    .mini-hero-box:hover {
-      transform: translateY(-2px);
-      border-color: rgba(211,108,255,0.35);
     }
 
     .mini-hero-box strong {
@@ -291,6 +234,15 @@
       border-radius: 22px;
       padding: 20px;
       margin-top: 10px;
+    }
+
+    .featured img {
+      width: 100%;
+      height: 220px;
+      object-fit: cover;
+      border-radius: 16px;
+      margin-bottom: 14px;
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .featured .label {
@@ -457,31 +409,33 @@
       animation: fadeUp 0.5s ease both;
     }
 
-    .product:nth-child(2) { animation-delay: 0.05s; }
-    .product:nth-child(3) { animation-delay: 0.1s; }
-    .product:nth-child(4) { animation-delay: 0.15s; }
-    .product:nth-child(5) { animation-delay: 0.2s; }
-    .product:nth-child(6) { animation-delay: 0.25s; }
-
     .product-top {
-      height: 190px;
-      display: flex;
-      align-items: end;
-      justify-content: space-between;
-      padding: 16px;
-      background:
-        radial-gradient(circle at top left, rgba(138,43,226,0.35), transparent 40%),
-        radial-gradient(circle at bottom right, rgba(255,0,89,0.2), transparent 40%),
-        linear-gradient(135deg, #1a1a25, #111118);
+      position: relative;
+      height: 200px;
+      overflow: hidden;
+      background: #111;
     }
 
-    .product-emoji {
-      font-size: 54px;
-      filter: drop-shadow(0 0 18px rgba(255,255,255,0.08));
+    .product-top img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .product-top::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(5,5,7,0.85), rgba(5,5,7,0.15));
     }
 
     .badge {
-      background: rgba(0,0,0,0.35);
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      z-index: 2;
+      background: rgba(0,0,0,0.55);
       border: 1px solid rgba(255,255,255,0.08);
       padding: 8px 12px;
       border-radius: 999px;
@@ -671,8 +625,6 @@
       font-size: 15px;
     }
 
-    .discord-icon { font-size: 18px; }
-
     .proof-status {
       margin-top: 12px;
       color: #d7d7e6;
@@ -777,14 +729,8 @@
     }
 
     @keyframes fadeUp {
-      from {
-        opacity: 0;
-        transform: translateY(18px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 1250px) {
@@ -848,25 +794,13 @@
       <div class="tag">LOJA DIGITAL PROFISSIONAL</div>
       <h2>A versão final da <span class="highlight">NUTSS premium</span></h2>
       <p>
-        Uma loja mais forte visualmente, com banner Free Fire em destaque, cards premium,
+        Uma loja mais forte visualmente, com banner Free Fire em destaque, cards com imagens,
         busca, filtro, contador de vendas por produto, suporte via Discord e área do dono organizada.
       </p>
 
       <div class="hero-actions">
         <a class="btn" href="#produtos">Ver produtos</a>
         <button class="btn" onclick="abrirCarrinho()">Abrir pagamento</button>
-      </div>
-
-      <div class="ff-banner">
-        <div class="ff-banner-top">
-          <div>
-            <div class="ff-banner-badge">FREE FIRE • CONTA RARA</div>
-            <h3>Conta Free Fire Premium</h3>
-            <p>Angelical, passes, punhos e muito mais. Ideal para começar jogando com uma conta premium em destaque na loja.</p>
-            <div class="ff-price">R$ 300,00</div>
-          </div>
-          <button class="btn" onclick="comprarDireto('Conta Free Fire Premium', 300)">Comprar agora</button>
-        </div>
       </div>
 
       <div class="hero-grid">
@@ -890,6 +824,7 @@
       <p>Seu item principal no topo, com mais peso visual e botão de compra rápido.</p>
 
       <div class="featured">
+        <img src="images/freefire.jpg" alt="Conta Free Fire Premium">
         <div class="label">DESTAQUE DA LOJA</div>
         <h4>Conta Free Fire Premium</h4>
         <p>Conta premium anunciada com Angelical, passes, punhos e muito mais.</p>
@@ -961,7 +896,7 @@
       <div class="product" data-name="Conta Free Fire Premium" data-category="Contas de Jogos">
         <div class="product-top">
           <span class="badge badge-rare">Conta rara</span>
-          <div class="product-emoji">🔥</div>
+          <img src="images/freefire.jpg" alt="Conta Free Fire Premium">
         </div>
         <div class="product-body">
           <div class="category">Contas de Jogos</div>
@@ -982,7 +917,7 @@
       <div class="product" data-name="Discord Nitro" data-category="Assinaturas">
         <div class="product-top">
           <span class="badge">Mais vendido</span>
-          <div class="product-emoji">💬</div>
+          <img src="images/nitro.jpg" alt="Discord Nitro">
         </div>
         <div class="product-body">
           <div class="category">Assinaturas</div>
@@ -1003,7 +938,7 @@
       <div class="product" data-name="Steam Key Aleatória" data-category="Keys de Jogos">
         <div class="product-top">
           <span class="badge">Entrega digital</span>
-          <div class="product-emoji">🎮</div>
+          <img src="images/steam.jpg" alt="Steam Key Aleatória">
         </div>
         <div class="product-body">
           <div class="category">Keys de Jogos</div>
@@ -1024,7 +959,7 @@
       <div class="product" data-name="Gift Card Gamer" data-category="Gift Cards">
         <div class="product-top">
           <span class="badge">Popular</span>
-          <div class="product-emoji">🎁</div>
+          <img src="images/giftcard.jpg" alt="Gift Card Gamer">
         </div>
         <div class="product-body">
           <div class="category">Gift Cards</div>
@@ -1045,7 +980,7 @@
       <div class="product" data-name="Rockstar GTA V" data-category="Licença oficial">
         <div class="product-top">
           <span class="badge">Oferta</span>
-          <div class="product-emoji">🚗</div>
+          <img src="images/gta5.jpg" alt="Rockstar GTA V">
         </div>
         <div class="product-body">
           <div class="category">Licença oficial</div>
@@ -1066,7 +1001,7 @@
       <div class="product" data-name="Red Dead Redemption 2" data-category="Keys de Jogos">
         <div class="product-top">
           <span class="badge">Premium</span>
-          <div class="product-emoji">🤠</div>
+          <img src="images/rdr2.jpg" alt="Red Dead Redemption 2">
         </div>
         <div class="product-body">
           <div class="category">Keys de Jogos</div>
@@ -1149,8 +1084,7 @@
             Entre no Discord oficial da NUTSS para falar com o suporte da loja.
           </p>
           <a class="discord-btn" href="https://discord.gg/p5TtR85Pte" target="_blank" rel="noopener noreferrer">
-            <span class="discord-icon">🎮</span>
-            Entrar no Discord da loja
+            🎮 Entrar no Discord da loja
           </a>
         </div>
 
