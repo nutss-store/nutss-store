@@ -1,47 +1,95 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NUTSS STORE</title>
-
-<link rel="stylesheet" href="style.css">
-<script src="app.js"></script>
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NUTSS STORE</title>
+  <link rel="stylesheet" href="style.css">
 </head>
-
 <body>
 
-<h1>NUTSS STORE</h1>
-<p>Produtos digitais com entrega rápida</p>
+  <div class="bg-glow"></div>
+  <canvas id="particles"></canvas>
 
-<div class="products">
+  <header class="hero">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <h1>NUTSS STORE</h1>
+      <p>Produtos digitais com entrega rápida e suporte via Discord.</p>
+      <a href="#produtos" class="hero-btn">Ver Produtos</a>
+    </div>
+  </header>
 
-<div class="card">
-<h2>Conta FiveM</h2>
-<p>Conta pronta para GTA RP</p>
-<h3>R$10</h3>
-<button>Comprar</button>
-</div>
+  <section class="products-section" id="produtos">
+    <h2 class="section-title">Produtos</h2>
 
-<div class="card">
-<h2>Discord Nitro</h2>
-<p>Entrega digital rápida</p>
-<h3>R$12</h3>
-<button>Comprar</button>
-</div>
+    <div class="products">
+      <div class="card">
+        <div class="card-badge">Popular</div>
+        <div class="icon">🎮</div>
+        <h3>Conta FiveM</h3>
+        <p>Conta pronta para GTA RP</p>
+        <div class="price">R$10</div>
+        <button onclick="openPayment('Conta FiveM', 'R$10')">Comprar</button>
+      </div>
 
-</div>
+      <div class="card">
+        <div class="card-badge">Entrega rápida</div>
+        <div class="icon">💜</div>
+        <h3>Discord Nitro</h3>
+        <p>Entrega digital rápida</p>
+        <div class="price">R$12</div>
+        <button onclick="openPayment('Discord Nitro', 'R$12')">Comprar</button>
+      </div>
+    </div>
+  </section>
 
-<div id="popup"></div>
+  <section class="trust-section">
+    <div class="trust-box">
+      <h2>Por que comprar na NUTSS?</h2>
+      <div class="trust-items">
+        <div class="trust-item">⚡ Entrega rápida</div>
+        <div class="trust-item">🛡️ Atendimento via ticket</div>
+        <div class="trust-item">💬 Suporte no Discord</div>
+        <div class="trust-item">🔥 Produtos digitais</div>
+      </div>
+    </div>
+  </section>
 
-<footer>
-<p>NUTSS STORE © 2026</p>
-</footer>
+  <footer>
+    <p>NUTSS STORE © 2026</p>
+  </footer>
 
-<div id="popup"></div>
+  <div id="paymentModal" class="modal">
+    <div class="modal-content">
+      <span class="close" onclick="closePayment()">&times;</span>
+      <h2 id="productName">Produto</h2>
+      <p class="modal-price" id="productPrice">R$0</p>
 
+      <div class="pix-box">
+        <p class="pix-title">Chave PIX</p>
+        <div class="pix-key" id="pixKey">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</div>
+        <button class="copy-btn" onclick="copyPix()">Copiar chave PIX</button>
+      </div>
+
+      <div class="steps">
+        <h3>Como comprar</h3>
+        <ol>
+          <li>Copie a chave PIX</li>
+          <li>Faça o pagamento</li>
+          <li>Entre no Discord</li>
+          <li>Abra um ticket</li>
+          <li>Envie o comprovante</li>
+          <li>Receba seu produto</li>
+        </ol>
+      </div>
+
+      <a class="discord-btn" href="https://discord.gg/pPgSWvKvza" target="_blank">Abrir Ticket no Discord</a>
+    </div>
+  </div>
+
+  <div id="popup" class="popup"></div>
+
+  <script src="app.js"></script>
 </body>
 </html>
