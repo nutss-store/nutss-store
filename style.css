@@ -65,7 +65,7 @@ a {
 .nav-logo {
   width: 34px;
   height: 34px;
-  border-radius: 50%;
+  object-fit: contain;
 }
 
 .nav-menu {
@@ -106,12 +106,26 @@ a {
   max-width: 920px;
 }
 
+.hero-logo-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  margin-bottom: 16px;
+}
+
 .store-logo {
   width: 120px;
   max-width: 80%;
-  margin-bottom: 16px;
   filter: drop-shadow(0 0 22px rgba(77,163,255,0.35));
   animation: floatLogo 3s ease-in-out infinite;
+}
+
+.hero-n {
+  font-size: 64px;
+  font-weight: 900;
+  color: white;
+  text-shadow: 0 0 20px rgba(77,163,255,0.45);
 }
 
 .small-tag {
@@ -529,6 +543,10 @@ footer {
 
   .store-logo {
     width: 95px;
+  }
+
+  .hero-n {
+    font-size: 46px;
   }
 
   .card {
