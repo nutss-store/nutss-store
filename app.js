@@ -24,7 +24,7 @@ function copyPix() {
 
 const popup = document.getElementById("popup");
 const fakeNames = ["Lucas", "João", "Pedro", "Mateus", "Carlos", "Ana", "Rafaela", "Julia"];
-const fakeProducts = ["Pacote FiveM Private", "Discord Nitro"];
+const fakeProducts = ["Pacote FiveM Private", "Discord Nitro Premium"];
 
 function showFakePopup() {
   const randomName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
@@ -39,6 +39,20 @@ function showFakePopup() {
 }
 
 setInterval(showFakePopup, 9000);
+
+let counter = 0;
+const target = 137;
+const counterEl = document.getElementById("clientCounter");
+
+function animateCounter() {
+  if (!counterEl) return;
+  counter += 1;
+  counterEl.innerText = counter;
+  if (counter < target) {
+    setTimeout(animateCounter, 20);
+  }
+}
+animateCounter();
 
 const canvas = document.getElementById("particles");
 const ctx = canvas.getContext("2d");
