@@ -1,40 +1,82 @@
-// contador de clientes
-let counter = document.querySelector(".counter");
-if(counter){
-let target = counter.getAttribute("data-target");
-let count = 0;
-
-function updateCounter(){
-count += 1;
-counter.innerText = count;
-
-if(count < target){
-setTimeout(updateCounter,20);
-}
+function openPayment(product, price) {
+  document.getElementById("productName").innerText = product;
+  document.getElementById("productPrice").innerText = price;
+  document.getElementById("paymentModal").style.display = "block";
 }
 
-updateCounter();
+function closePayment() {
+  document.getElementById("paymentModal").style.display = "none";
 }
 
-// popup de compra fake
-let names = ["Lucas","João","Pedro","Ana","Carlos","Mateus"];
-let products = ["Conta FiveM","Discord Nitro"];
+window.onclick = function(event) {
+  const modal = document.getElementById("paymentModal");
+  if (event.target === modal) {
+    modal.style.display = "none";
+  }
+};
 
-function fakeSale(){
-
-let popup = document.getElementById("popup");
-if(!popup) return;
-
-let name = names[Math.floor(Math.random()*names.length)];
-let product = products[Math.floor(Math.random()*products.length)];
-
-popup.innerText = name + " acabou de comprar " + product;
-popup.style.display = "block";
-
-setTimeout(()=>{
-popup.style.display="none";
-},4000);
-
+function copyPix() {
+  const pix = document.getElementById("pixKey").innerText;
+  navigator.clipboard.writeText(pix).then(() => {
+    alert("Chave PIX copiada com sucesso.");
+  });
 }
 
-setInterval(fakeSale,8000);
+const popup = document.getElementById("popup");
+const fakeNames = ["Lucas", "João", "Pedro", "Mateus", "Carlos", "Ana", "Rafaela", "Julia"];
+const fakeProducts = ["Conta FiveM", "Discord Nitro"];
+
+function showFakePopup() {
+  const randomName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
+  const randomProduct = fakeProducts[Math.floor(Math.random() * fakeProducts.length)];
+
+  popup.innerText = randomName + " acabou de comprar " + randomProduct;
+  popup.style.display = "block";
+
+  setTimeout(() => {
+    popup.style.display = "none";
+  }, 4000);
+}
+
+setInterval(showFakePopup, 9000);
+
+const canvas = document.getElementById("particles");
+const ctx = canvas.getContext("2d");
+
+function resizeCanvas() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener("resize", resizeCanvas);
+
+const particles = [];
+for (let i = 0; i < 70; i++) {
+  particles.push({
+    x: Math.random() * canvas.width,
+    y: Math.random() * canvas.height,
+    r: Math.random() * 2 + 1,
+    dx: (Math.random() - 0.5) * 0.6,
+    dy: (Math.random() - 0.5) * 0.6
+  });
+}
+
+function animateParticles() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  for (let p of particles) {
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+    ctx.fillStyle = "rgba(77,163,255,0.7)";
+    ctx.fill();
+
+    p.x += p.dx;
+    p.y += p.dy;
+
+    if (p.x < 0 || p.x > canvas.width) p.dx *= -1;
+    if (p.y < 0 || p.y > canvas.height) p.dy *= -1;
+  }
+
+  requestAnimationFrame(animateParticles);
+}
+animateParticles();
