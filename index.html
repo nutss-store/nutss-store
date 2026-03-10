@@ -11,22 +11,55 @@
   <div class="bg-glow"></div>
   <canvas id="particles"></canvas>
 
-  <header class="hero">
+  <header class="topbar">
+    <div class="logo-wrap">
+      <img class="nav-logo" src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="Logo NUTSS">
+      <span>NUTSS STORE</span>
+    </div>
+
+    <nav class="nav-menu">
+      <a href="#inicio">Início</a>
+      <a href="#produtos">Produtos</a>
+      <a href="#vantagens">Vantagens</a>
+      <a href="https://discord.gg/pPgSWvKvza" target="_blank">Discord</a>
+    </nav>
+  </header>
+
+  <section class="hero" id="inicio">
     <div class="hero-overlay"></div>
     <div class="hero-content">
-      <img class="store-logo" src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png">
+      <img class="store-logo" src="https://cdn-icons-png.flaticon.com/512/1041/1041916.png" alt="Logo NUTSS STORE">
+      <span class="small-tag">PREMIUM DIGITAL STORE</span>
       <h1>NUTSS STORE</h1>
-      <p>Produtos digitais premium com entrega rápida e suporte via Discord.</p>
-      <a href="#produtos" class="hero-btn">Ver Produtos</a>
+      <p>Loja premium com entrega rápida, suporte via Discord e pagamento por PIX.</p>
+      <div class="hero-actions">
+        <a href="#produtos" class="hero-btn">Ver Produtos</a>
+        <a href="https://discord.gg/pPgSWvKvza" target="_blank" class="hero-btn secondary-btn">Entrar no Discord</a>
+      </div>
     </div>
-  </header>
+  </section>
+
+  <section class="stats-section">
+    <div class="stat-box">
+      <div class="stat-number" id="clientCounter">0</div>
+      <div class="stat-label">Clientes satisfeitos</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">24/7</div>
+      <div class="stat-label">Suporte no Discord</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-number">PIX</div>
+      <div class="stat-label">Pagamento rápido</div>
+    </div>
+  </section>
 
   <section class="banner-premium">
     <div class="banner-box">
       <div class="banner-text">
-        <span class="premium-tag">PREMIUM STORE</span>
-        <h2>Visual pesado, suporte rápido e entrega digital</h2>
-        <p>Compre, pague via PIX e envie o comprovante no Discord para receber seu produto.</p>
+        <span class="premium-tag">DESTAQUE</span>
+        <h2>Visual premium, compra simples e atendimento rápido</h2>
+        <p>Escolha o produto, clique em comprar, copie a chave PIX e envie o comprovante no ticket do Discord.</p>
       </div>
     </div>
   </section>
@@ -47,17 +80,17 @@
 
       <div class="card premium-card">
         <div class="card-badge">Entrega rápida</div>
-        <img class="product-image" src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord Nitro">
-        <h3>Discord Nitro</h3>
+        <img class="product-image" src="https://cdn-icons-png.flaticon.com/512/2111/2111370.png" alt="Discord Nitro Premium">
+        <h3>Discord Nitro Premium</h3>
         <p>Entrega digital rápida</p>
         <div class="price">R$30</div>
-        <button onclick="openPayment('Discord Nitro', 'R$30')">Comprar</button>
+        <button onclick="openPayment('Discord Nitro Premium', 'R$30')">Comprar</button>
       </div>
 
     </div>
   </section>
 
-  <section class="trust-section">
+  <section class="trust-section" id="vantagens">
     <div class="trust-box">
       <h2>Por que comprar na NUTSS?</h2>
       <div class="trust-items">
@@ -65,6 +98,24 @@
         <div class="trust-item">💬 Suporte no Discord</div>
         <div class="trust-item">🛡️ Atendimento via ticket</div>
         <div class="trust-item">🔥 Loja premium</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="feedback-section">
+    <h2 class="section-title">Feedback dos clientes</h2>
+    <div class="feedback-grid">
+      <div class="feedback-card">
+        <p>"Entrega rápida e atendimento top."</p>
+        <span>— Lucas</span>
+      </div>
+      <div class="feedback-card">
+        <p>"Comprei e recebi no ticket certinho."</p>
+        <span>— Matheus</span>
+      </div>
+      <div class="feedback-card">
+        <p>"Loja organizada e suporte muito rápido."</p>
+        <span>— Rafael</span>
       </div>
     </div>
   </section>
