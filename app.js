@@ -22,9 +22,13 @@ function copyPix() {
   });
 }
 
+function buyOnDiscord(product, price) {
+  window.open("https://discord.gg/pPgSWvKvza", "_blank");
+}
+
 const popup = document.getElementById("popup");
 const fakeNames = ["Lucas", "João", "Pedro", "Mateus", "Carlos", "Ana", "Rafaela", "Julia"];
-const fakeProducts = ["Pacote FiveM Private", "Discord Nitro Premium"];
+const fakeProducts = ["Pacote FiveM Private", "Nitro 3 Mensal"];
 
 function showFakePopup() {
   const randomName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
@@ -41,7 +45,7 @@ function showFakePopup() {
 setInterval(showFakePopup, 9000);
 
 let counter = 0;
-const target = 137;
+const target = 13;
 const counterEl = document.getElementById("clientCounter");
 
 function animateCounter() {
@@ -49,7 +53,7 @@ function animateCounter() {
   counter += 1;
   counterEl.innerText = counter;
   if (counter < target) {
-    setTimeout(animateCounter, 20);
+    setTimeout(animateCounter, 60);
   }
 }
 animateCounter();
