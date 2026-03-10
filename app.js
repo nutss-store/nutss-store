@@ -24,7 +24,7 @@ function copyPix() {
 
 const popup = document.getElementById("popup");
 const fakeNames = ["Lucas", "João", "Pedro", "Mateus", "Carlos", "Ana", "Rafaela", "Julia"];
-const fakeProducts = ["Conta FiveM", "Discord Nitro"];
+const fakeProducts = ["Pacote FiveM Private", "Discord Nitro"];
 
 function showFakePopup() {
   const randomName = fakeNames[Math.floor(Math.random() * fakeNames.length)];
@@ -51,7 +51,7 @@ resizeCanvas();
 window.addEventListener("resize", resizeCanvas);
 
 const particles = [];
-for (let i = 0; i < 70; i++) {
+for (let i = 0; i < 80; i++) {
   particles.push({
     x: Math.random() * canvas.width,
     y: Math.random() * canvas.height,
