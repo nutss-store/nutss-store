@@ -1,111 +1,45 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NUTSS STORE</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="app.js"></script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>NUTSS STORE</title>
+
+<link rel="stylesheet" href="estilo.css">
+<script src="app.js"></script>
+
 </head>
+
 <body>
-  <div class="bg"></div>
-  <canvas id="particles"></canvas>
 
-  <header class="hero">
-    <div class="topbar">
-      <div class="brand">NUTSS STORE</div>
-      <div class="nav-actions">
-        <button class="nav-btn" onclick="openLogin()">Login</button>
-        <button class="nav-btn" onclick="openRegister()">Registrar</button>
-        <button class="nav-btn cart-btn" onclick="toggleCart()">Carrinho (<span id="cartCount">0</span>)</button>
-        <button class="nav-btn admin-btn" onclick="openAdmin()">Admin</button>
-      </div>
-    </div>
+<h1>NUTSS STORE</h1>
+<p>Produtos digitais com entrega rápida</p>
 
-    <div class="hero-content reveal">
-      <h1>NUTSS STORE</h1>
-      <p>Produtos digitais com entrega rápida e suporte via Discord.</p>
-      <a href="#produtos" class="main-btn">Ver Produtos</a>
-    </div>
-  </header>
+<div class="products">
 
-  <section class="stats reveal">
-    <div class="stat-box">
-      <h2>Clientes satisfeitos</h2>
-      <div class="counter" data-target="137">0</div>
-    </div>
-  </section>
+<div class="card">
+<h2>Conta FiveM</h2>
+<p>Conta pronta para GTA RP</p>
+<h3>R$10</h3>
+<button>Comprar</button>
+</div>
 
-  <section id="produtos" class="products-section reveal">
-    <div class="section-title">
-      <h2>Produtos</h2>
-      <p>Escolha seu produto e finalize via PIX.</p>
-    </div>
+<div class="card">
+<h2>Discord Nitro</h2>
+<p>Entrega digital rápida</p>
+<h3>R$12</h3>
+<button>Comprar</button>
+</div>
 
-    <div class="products-grid">
-      <div class="product-card" onmousemove="tiltCard(event, this)" onmouseleave="resetTilt(this)">
-        <div class="card-shine"></div>
-        <div class="product-icon">🎮</div>
-        <h3>Conta FiveM</h3>
-        <p>Conta pronta para GTA RP.</p>
-        <div class="price">R$10</div>
-        <button class="buy-btn" onclick="addToCart('Conta FiveM', 10)">Adicionar ao carrinho</button>
-      </div>
+</div>
 
-      <div class="product-card" onmousemove="tiltCard(event, this)" onmouseleave="resetTilt(this)">
-        <div class="card-shine"></div>
-        <div class="product-icon">💜</div>
-        <h3>Discord Nitro</h3>
-        <p>Entrega digital rápida.</p>
-        <div class="price">R$12</div>
-        <button class="buy-btn" onclick="addToCart('Discord Nitro', 12)">Adicionar ao carrinho</button>
-      </div>
-    </div>
-  </section>
+<div id="popup"></div>
 
-  <section class="checkout-section reveal">
-    <div class="checkout-box">
-      <h2>Pagamento via PIX</h2>
-      <p class="pix-label">Chave PIX</p>
-      <div class="pix-box" id="pixKey">6efe29f8-4de2-47b6-93e0-40fce6ead3d7</div>
-      <button class="copy-btn" onclick="copyPix()">Copiar chave PIX</button>
+<footer>
+<p>NUTSS STORE © 2026</p>
+</footer>
 
-      <div class="steps">
-        <h3>Como receber seu produto</h3>
-        <ol>
-          <li>Adicione o produto ao carrinho</li>
-          <li>Faça o pagamento via PIX</li>
-          <li>Entre no Discord</li>
-          <li>Abra um ticket</li>
-          <li>Envie o comprovante</li>
-          <li>Receba seu produto</li>
-        </ol>
-      </div>
-
-      <a class="discord-btn" href="https://discord.gg/pPgSWvKvza" target="_blank">Abrir Ticket no Discord</a>
-    </div>
-  </section>
-
-  <aside class="cart-panel" id="cartPanel">
-    <div class="cart-header">
-      <h3>Seu carrinho</h3>
-      <button class="close-cart" onclick="toggleCart()">✕</button>
-    </div>
-    <div id="cartItems" class="cart-items"></div>
-    <div class="cart-footer">
-      <div class="cart-total">Total: R$<span id="cartTotal">0</span></div>
-      <button class="checkout-btn" onclick="goToCheckout()">Ir para pagamento</button>
-    </div>
-  </aside>
-
-  <div class="modal" id="modal">
-    <div class="modal-box" id="modalContent"></div>
-  </div>
-
-  <div class="fake-popup" id="fakePopup"></div>
-
-  <footer class="footer">
-    <p>NUTSS STORE © 2026</p>
-  </footer>
 </body>
 </html>
